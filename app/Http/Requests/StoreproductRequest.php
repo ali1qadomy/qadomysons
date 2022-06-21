@@ -24,7 +24,20 @@ class StoreproductRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'productname' => 'required',
+            'productdesc' => 'required|min:10|max:20',
+            'ProdSubCategory' => 'required',
+            'image' => 'required'
         ];
     }
+    public function messages()
+    {
+        return[
+            'productname.required'=>'product name is required',
+            'productdesc.required'=>'product description is required',
+            'ProdSubCategory.required'=>'category/product is required',
+        ];
+    }
+
+  
 }

@@ -6,6 +6,7 @@
     <title>Atlantis Lite - Bootstrap 4 Admin Dashboard</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     @include('partial.style')
+
     @yield('userstyle')
 </head>
 
@@ -34,6 +35,7 @@
 
     </div>
     @include('partial.script')
+    @include('sweetalert::alert')
 </body>
 
 </html>

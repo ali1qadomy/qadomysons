@@ -13,11 +13,21 @@
 @section('content')
     <div class="container table">
         <div class="row">
+            
             <div class="col-md-12 ">
                 <div class="card tablebrache">
                     <div class="card-header">
                         <h4 class="card-title">Product Details</h4>
                     </div>
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="basic-datatables" class="display table table-striped table-hover">
