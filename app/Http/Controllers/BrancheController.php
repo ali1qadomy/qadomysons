@@ -7,6 +7,7 @@ use App\Http\Requests\StorebrancheRequest;
 use App\Http\Requests\UpdatebrancheRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert as Alert;
 
 class BrancheController extends Controller
 {
@@ -18,10 +19,8 @@ class BrancheController extends Controller
     public function index()
     {
         $bra = branche::with('user')->get();
-        $user=User::all();
-       return view('branche.branche', compact('bra','user'));
-      
-       
+        $user = User::all();
+        return view('branche.branche', compact('bra', 'user'));
     }
 
     /**
@@ -42,11 +41,17 @@ class BrancheController extends Controller
      */
     public function store(StorebrancheRequest $request)
     {
-        $branche = new branche();
-        $branche->create([
-            'name' => $request->BrancheName,
-        ]);
-        return redirect()->back();
+        try {
+            $branche = new branche();
+            $branche->create([
+                'name' => $request->BrancheName,
+            ]);
+            Alert::Success('Success', 'Success Add');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            Alert::error('Failed', 'Failed Add');
+            return redirect()->route('branche.index');
+        }
     }
 
     /**
@@ -80,10 +85,16 @@ class BrancheController extends Controller
      */
     public function update(UpdatebrancheRequest $request, branche $branche)
     {
-        $branche->update([
-            'name' => $request->uBrancheName,
-        ]);
-        return redirect()->back();
+        try {
+            $branche->update([
+                'name' => $request->uBrancheName,
+            ]);
+            Alert::success('Success', 'Success Update');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            Alert::error('Failed', 'Failed Add');
+            return redirect()->route('branche.index');
+        }
     }
 
     /**
@@ -94,8 +105,14 @@ class BrancheController extends Controller
      */
     public function destroy(branche $branche, Request $request)
     {
+      try {
         $branche = branche::where('id', $request->deletebranche)->first();
         $branche->delete();
+        Alert::success('Success','Success Delete');
         return redirect()->back();
+      } catch (\Throwable $th) {
+        Alert::error('Failed','Failed Delete');
+        return redirect()->back();
+      }
     }
 }

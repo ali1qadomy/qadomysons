@@ -14,7 +14,7 @@
                 @method('delete')
                 <input type="hidden" name="deletesub" value="{{ $item->id }}">
                 <div class="modal-body">
-                    you are sure to delete this SubCategory
+                    you are sure to delete this Sub_Category
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

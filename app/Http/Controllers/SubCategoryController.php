@@ -45,7 +45,6 @@ class SubCategoryController extends Controller
     public function store(StoresubCategoryRequest $request)
     {
 
-
         try {
             $sub = new subCategory();
             $sub->create([
@@ -115,14 +114,13 @@ class SubCategoryController extends Controller
      */
     public function destroy(subCategory $subCategory, Request $request)
     {
-    try {
-        $subCategory = subCategory::where('id', $request->deletesub)->delete();
-        Alert::success('Success ','Success Delete');
-        return redirect()->route('subcategory.index');
-    } catch (\Throwable $th) {
-        Alert::error('Failed ','Failed To[ Delete');
-        return redirect()->route('subcategory.index');
-    }
-        
+        try {
+            $subCategory = subCategory::where('id', $request->deletesub)->delete();
+            Alert::success('Success ', 'Success Delete');
+            return redirect()->route('subcategory.index');
+        } catch (\Throwable $th) {
+            Alert::error('Failed ', 'Failed To[ Delete');
+            return redirect()->route('subcategory.index');
+        }
     }
 }

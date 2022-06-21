@@ -8,7 +8,7 @@
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                         <span>
-                            <span class="user-level">{{auth::user()->name}}</span>
+                            <span class="user-level">{{ auth::user()->name }}</span>
                             <span class="caret"></span>
                         </span>
                     </a>
@@ -37,25 +37,10 @@
             </div>
             <ul class="nav nav-primary">
                 <li class="nav-item active">
-                    <a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+                    <a href="page">
                         <i class="fas fa-home"></i>
-                        <p>Dashboard</p>
-                        <span class="caret"></span>
+                        <p>Home</p>
                     </a>
-                    <div class="collapse" id="dashboard">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="../demo1/index.html">
-                                    <span class="sub-item">Dashboard 1</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="../demo2/index.html">
-                                    <span class="sub-item">Dashboard 2</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
                 <li class="nav-section">
                     <span class="sidebar-mini-icon">
@@ -63,68 +48,39 @@
                     </span>
                     <h4 class="text-section">Components</h4>
                 </li>
-                @if(auth::user()->hasRole('Owner|employee'))
-                <li class="nav-item">
-                    <a data-toggle="collapse" href="#base">
-                        <i class="fas fa-layer-group"></i>
-                        <p>Base</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="base">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="components/avatars.html">
-                                    <span class="sub-item">Avatars</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/buttons.html">
-                                    <span class="sub-item">Buttons</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/gridsystem.html">
-                                    <span class="sub-item">Grid System</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/panels.html">
-                                    <span class="sub-item">Panels</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/notifications.html">
-                                    <span class="sub-item">Notifications</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/sweetalert.html">
-                                    <span class="sub-item">Sweet Alert</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/font-awesome-icons.html">
-                                    <span class="sub-item">Font Awesome Icons</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/simple-line-icons.html">
-                                    <span class="sub-item">Simple Line Icons</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/flaticons.html">
-                                    <span class="sub-item">Flaticons</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/typography.html">
-                                    <span class="sub-item">Typography</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                @if (auth::user()->hasRole('Owner|employee'))
+                    <li class="nav-item">
+                        <a data-toggle="collapse" href="#base">
+                            <i class="fas fa-layer-group"></i>
+                            <p>Company Parts</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="base">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <a href="branche">
+                                        <span class="sub-item">branches</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="category">
+                                        <span class="sub-item">Category</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="subcategory">
+                                        <span class="sub-item"> Sub Category</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="product">
+                                        <span class="sub-item">Products</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
                 @endif
                 <li class="nav-item">
                     <a data-toggle="collapse" href="#sidebarLayouts">
@@ -296,8 +252,8 @@
                 </li>
                 <li class="mx-4 mt-2">
                     <a href="http://themekita.com/atlantis-bootstrap-dashboard.html"
-                        class="btn btn-primary btn-block"><span class="btn-label mr-2"> <i
-                                class="fa fa-heart"></i> </span>Buy Pro</a>
+                        class="btn btn-primary btn-block"><span class="btn-label mr-2"> <i class="fa fa-heart"></i>
+                        </span>Buy Pro</a>
                 </li>
             </ul>
         </div>

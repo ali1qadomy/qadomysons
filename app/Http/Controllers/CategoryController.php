@@ -6,6 +6,7 @@ use App\Models\category;
 use App\Http\Requests\StorecategoryRequest;
 use App\Http\Requests\UpdatecategoryRequest;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert as Alert;
 
 class CategoryController extends Controller
 {
@@ -38,12 +39,18 @@ class CategoryController extends Controller
      */
     public function store(StorecategoryRequest $request)
     {
-        $cat = new category();
-        $cat->create([
-            'name' => $request->categoryName,
-            'description' => $request->categoryDesc
-        ]);
-        return redirect()->back();
+        try {
+            $cat = new category();
+            $cat->create([
+                'name' => $request->categoryName,
+                'description' => $request->categoryDesc
+            ]);
+            Alert::success('Success', 'Success Add');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            Alert::error('Failed', 'Failed Add');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -77,12 +84,18 @@ class CategoryController extends Controller
      */
     public function update(UpdatecategoryRequest $request, category $category)
     {
-        $category = category::find($request->updatecategory);
-        $category->update([
-            'name' => $request->ucategoryName,
-            'description' => $request->ucategoryDesc
-        ]);
-        return redirect()->back();
+        try {
+            $category = category::find($request->updatecategory);
+            $category->update([
+                'name' => $request->ucategoryName,
+                'description' => $request->ucategoryDesc
+            ]);
+            Alert::success('Success', 'Success Update');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            Alert::error('Failed', 'Failed Update');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -93,7 +106,13 @@ class CategoryController extends Controller
      */
     public function destroy(category $category, Request $request)
     {
+      try {
         $category = category::find($request->deletecategory)->delete();
+        Alert::success('Success','Success Delete');
         return redirect()->back();
+      } catch (\Throwable $th) {
+        Alert::error('Failed','Failed Delete');
+        return redirect()->back();
+      }
     }
 }
