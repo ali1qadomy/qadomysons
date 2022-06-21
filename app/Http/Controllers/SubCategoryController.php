@@ -6,7 +6,11 @@ use App\Models\subCategory;
 use App\Http\Requests\StoresubCategoryRequest;
 use App\Http\Requests\UpdatesubCategoryRequest;
 use App\Models\category;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
+
+use function Ramsey\Uuid\v1;
 
 class SubCategoryController extends Controller
 {
@@ -42,14 +46,19 @@ class SubCategoryController extends Controller
     {
 
 
-
-        $sub = new subCategory();
-        $sub->create([
-            'name' => $request->subname,
-            'description' => $request->subdesc,
-            'category_id' => $request->categorySelect
-        ]);
-        return redirect()->back();
+        try {
+            $sub = new subCategory();
+            $sub->create([
+                'name' => $request->subname,
+                'description' => $request->subdesc,
+                'category_id' => $request->categorySelect
+            ]);
+            Alert::success('Success', 'Success Add');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            Alert::success('Failed', 'Failed To Add');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -83,7 +92,19 @@ class SubCategoryController extends Controller
      */
     public function update(UpdatesubCategoryRequest $request, subCategory $subCategory)
     {
-        //
+        try {
+            $subCategory = subCategory::find($request->updatesub);
+            $subCategory->update([
+                'name' => $request->usubname,
+                'description' => $request->usubdesc,
+                'category_id' => $request->ucategorySelect,
+            ]);
+            Alert::success('Success', 'Success Update');
+            return redirect()->route('subcategory.index');
+        } catch (\Throwable $th) {
+            Alert::error('Failed', 'Failed Update');
+            return redirect()->route('subcategory.index');
+        }
     }
 
     /**
@@ -92,8 +113,16 @@ class SubCategoryController extends Controller
      * @param  \App\Models\subCategory  $subCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(subCategory $subCategory)
+    public function destroy(subCategory $subCategory, Request $request)
     {
-        //
+    try {
+        $subCategory = subCategory::where('id', $request->deletesub)->delete();
+        Alert::success('Success ','Success Delete');
+        return redirect()->route('subcategory.index');
+    } catch (\Throwable $th) {
+        Alert::error('Failed ','Failed To[ Delete');
+        return redirect()->route('subcategory.index');
+    }
+        
     }
 }

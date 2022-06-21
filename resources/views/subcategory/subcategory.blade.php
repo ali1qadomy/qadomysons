@@ -16,18 +16,18 @@
             <div class="col-md-12 ">
                 <div class="card tablebrache">
                     <div class="card-header">
-                        <h4 class="card-title"> SubCategory</h4>
+                        <h4 class="card-title"> Sub_Category</h4>
                     </div>
                     <div class="card-body">
                         @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="table-responsive">
                             <table id="basic-datatables" class="display table table-striped table-hover">
                                 <thead>
@@ -57,14 +57,16 @@
                                             <td>{{ $item->description }}</td>
                                             <td>{{ $item->category->name }}</td>
                                             <td>
-                                                <a href="" data-target="#updatecategory-{{ $item->id }}"
+                                                <a href="" data-target="#updatesub-{{ $item->id }}"
                                                     data-toggle="modal" class="btn btn-success btn-sm">EDIT</a>
-                                                <a href="" data-target="#deletecategory-{{ $item->id }}"
+                                                <a href="" data-target="#deletesub-{{ $item->id }}"
                                                     data-toggle="modal"
                                                     class="btn btn-danger
                                                      btn-sm">Delete</a>
                                             </td>
                                         </tr>
+                                        @include('subcategory.updatesubcategory')
+                                        @include('subcategory.deletesubcategory')
                                     @endforeach
                                 </tbody>
                             </table>
@@ -72,7 +74,7 @@
                     </div>
                     @include('subcategory.newsub')
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newSub">
-                        Add New subCategory
+                        Add New Sub_Category
                     </button>
                 </div>
             </div>
