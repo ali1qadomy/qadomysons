@@ -62,6 +62,7 @@
 
     @include('partial.script')
     @yield('userscript')
+    @include('sweetalert::alert')
 </body>
 
 </html>

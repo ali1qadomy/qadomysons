@@ -6,7 +6,12 @@
    <!-- morris CSS -->
    <link href="{{ asset('admin/assets/plugins/morrisjs/morris.css') }}" rel="stylesheet">
    <!-- Custom CSS -->
+   @if (App::islocale('en'))
    <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
+   @else
+   <link href="{{ asset('admin/css-rtl/style.css') }}" rel="stylesheet">
+   @endif
+
    <!-- You can change the theme colors from here -->
    <link href="{{ asset('admin/css/colors/blue.css')}}" id="theme" rel="stylesheet">
    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
