@@ -1,19 +1,17 @@
-<!--icons-->
-<link rel="icon" href="{{ asset('admin/assets/img/icon.ico') }}" type="image/x-icon"/>
-
-<!-- Fonts and icons -->
-<script src="{{ asset('admin/assets/js/plugin/webfont/webfont.min.js') }}"></script>
-<script>
-    WebFont.load({
-        google: {"families":["Lato:300,400,700,900"]},
-        custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['admin/assets/css/fonts.min.css']},
-        active: function() {
-            sessionStorage.fonts = true;
-        }
-    });
-</script>
-
-<!-- CSS Files -->
-<link rel="stylesheet" href="{{ asset('admin/assets/css/bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ asset('admin/assets/css/atlantis.min.css') }}">
-
+   <!-- Favicon icon -->
+   <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('admin/assets/images/favicon.png') }}">
+   <title>Admin Press Admin Template - The Ultimate Bootstrap 4 Admin Template</title>
+   <!-- Bootstrap Core CSS -->
+   <link href="{{ asset('admin/assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+   <!-- morris CSS -->
+   <link href="{{ asset('admin/assets/plugins/morrisjs/morris.css') }}" rel="stylesheet">
+   <!-- Custom CSS -->
+   <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
+   <!-- You can change the theme colors from here -->
+   <link href="{{ asset('admin/css/colors/blue.css')}}" id="theme" rel="stylesheet">
+   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+   <!--[if lt IE 9]>
+   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->

@@ -7,6 +7,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Models\subCategory;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,18 +22,25 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/page', function () {
-    return view('admin');
-})->middleware(['auth']);
 
-Auth::routes();
 
-Route::middleware('auth')->group(function(){
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::resource('/branche', BrancheController::class);
-    Route::resource('/category', CategoryController::class);
-    Route::resource('/subcategory', SubCategoryController::class);
-    Route::resource('/product',ProductController::class);
-    
-});
 
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+    ],
+    function () {
+        Auth::routes();
+        Route::get('/page', function () {
+            return view('admin');
+        })->middleware(['auth']);
+        Route::middleware('auth')->group(function () {
+            Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+            Route::resource('/branche', BrancheController::class);
+            Route::resource('/category', CategoryController::class);
+            Route::resource('/subcategory', SubCategoryController::class);
+            Route::resource('/product', ProductController::class);
+        });
+    }
+);

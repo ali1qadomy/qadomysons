@@ -2,40 +2,66 @@
 <html lang="en">
 
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Atlantis Lite - Bootstrap 4 Admin Dashboard</title>
-    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
     @include('partial.style')
-
     @yield('userstyle')
 </head>
 
-<body>
-    <div class="wrapper">
-        <div class="main-header">
-            <!-- Logo Header -->
-            @include('partial.header')
-            <!-- End Logo Header -->
-
-            <!-- Navbar Header -->
-            @include('partial.navheader')
-            <!-- End Navbar -->
-        </div>
-
-        <!-- Sidebar -->
+<body class="fix-header fix-sidebar card-no-border">
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        @include('partial.navheader')
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
         @include('partial.sidebar')
-        <!-- End Sidebar -->
-
-        <div class="main-panel">
-            <div class="content">
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor">Dashboard</h3>
+                </div>
+                <div class="col-md-7 align-self-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div>
+                <div>
+                    <button
+                        class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i
+                            class="ti-settings text-white"></i></button>
+                </div>
+            </div>
+            <div class="container-fluid">
                 @yield('content')
             </div>
-            @include('partial.footer')
+
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer"> © 2017 Admin Press Admin by themedesigner.in </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
         </div>
 
     </div>
+
     @include('partial.script')
-    @include('sweetalert::alert')
+    @yield('userscript')
 </body>
 
 </html>

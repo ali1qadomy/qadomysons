@@ -30,7 +30,7 @@
                 @endif
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="basic-datatables" class="display table table-striped table-hover">
+                            <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>id</th>
