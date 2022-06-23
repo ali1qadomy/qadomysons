@@ -4,7 +4,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete Branche</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ trans('branche.Delete Branche') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,11 +14,11 @@
                 @method('delete')
                 <input type="hidden" name="deletebranche" value="{{ $item->id }}">
                 <div class="modal-body">
-                    you are sure to delete this branche
+                  {{ trans('branche.are you sure to delete this branche...') }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Delete Branche</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('branche.Close') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ trans('branche.Delete Branche') }}</button>
                 </div>
             </form>
         </div>

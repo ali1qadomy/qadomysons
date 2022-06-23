@@ -4,7 +4,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete Sub_Category</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ trans('sub_category.Delete Sub_Category') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,11 +14,11 @@
                 @method('delete')
                 <input type="hidden" name="deletesub" value="{{ $item->id }}">
                 <div class="modal-body">
-                    you are sure to delete this Sub_Category
+                   {{ trans('sub_category.you are sure to delete this Sub_Category') }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Delete Sub_Category</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('sub_category.Close') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ trans('sub_category.Delete Sub_Category') }}</button>
                 </div>
             </form>
         </div>

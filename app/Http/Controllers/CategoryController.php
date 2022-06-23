@@ -42,8 +42,8 @@ class CategoryController extends Controller
         try {
             $cat = new category();
             $cat->create([
-                'name' => $request->categoryName,
-                'description' => $request->categoryDesc
+                'name' => ['en' => $request->categoryNameEn, 'ar' => $request->categoryNameAr],
+                'description' => ['en' => $request->categoryDescEn, 'ar' => $request->categoryDescAr]
             ]);
             Alert::success('Success', 'Success Add');
             return redirect()->back();
@@ -87,8 +87,8 @@ class CategoryController extends Controller
         try {
             $category = category::find($request->updatecategory);
             $category->update([
-                'name' => $request->ucategoryName,
-                'description' => $request->ucategoryDesc
+                'name' => ['en' => $request->ucategoryNameEn, 'ar' => $request->ucategoryNameAr],
+                'description' => ['en' => $request->ucategoryDescEn, 'ar' => $request->ucategoryDescAr]
             ]);
             Alert::success('Success', 'Success Update');
             return redirect()->back();
@@ -106,13 +106,13 @@ class CategoryController extends Controller
      */
     public function destroy(category $category, Request $request)
     {
-      try {
-        $category = category::find($request->deletecategory)->delete();
-        Alert::success('Success','Success Delete');
-        return redirect()->back();
-      } catch (\Throwable $th) {
-        Alert::error('Failed','Failed Delete');
-        return redirect()->back();
-      }
+        try {
+            $category = category::find($request->deletecategory)->delete();
+            Alert::success('Success', 'Success Delete');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            Alert::error('Failed', 'Failed Delete');
+            return redirect()->back();
+        }
     }
 }

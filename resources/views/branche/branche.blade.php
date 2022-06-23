@@ -15,26 +15,35 @@
         <div class="row">
             <div class="col-md-12 ">
                 <div class="card tablebrache">
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                     <div class="card-header">
-                        <h4 class="card-title">Branches</h4>
+                        <h4 class="card-title">{{ trans('branche.branche') }}</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>id</th>
-                                        <th>Name</th>
-                                        <th># of employee</th>
-                                        <th>Action</th>
+                                        <th>{{ trans('branche.id') }}</th>
+                                        <th>{{ trans('branche.name') }}</th>
+                                        <th>{{ trans('branche.# of employee') }}</th>
+                                        <th>{{ trans('branche.action') }}</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>id</th>
-                                        <th>Name</th>
-                                        <th># of employee</th>
-                                        <th>Action</th>
+                                        <th>{{ trans('branche.id') }}</th>
+                                        <th>{{ trans('branche.name') }}</th>
+                                        <th>{{ trans('branche.# of employee') }}</th>
+                                        <th>{{ trans('branche.action') }}</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -46,9 +55,9 @@
                                             <td>{{ $item->user->count() }}</td>
                                             <td>
                                                 <a href="" data-target="#updatebranche-{{ $item->id }}"
-                                                    data-toggle="modal" class="btn btn-success btn-sm">EDIT</a>
+                                                    data-toggle="modal" class="btn btn-success btn-sm">{{ trans('branche.edit') }}</a>
                                                 <a href="" data-target="#deletebranche-{{ $item->id }}"
-                                                    data-toggle="modal" class="btn btn-danger btn-sm">Delete</a>
+                                                    data-toggle="modal" class="btn btn-danger btn-sm">{{ trans('branche.delete') }}</a>
                                             </td>
                                         </tr>
                                         @include('branche.updatebranche')
@@ -60,7 +69,7 @@
                     </div>
                     @include('branche.addnewbranche')
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newbranche">
-                        Add New Branche
+                      {{ trans('branche.Add New Branche') }}
                     </button>
                 </div>
             </div>

@@ -4,7 +4,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update Branche</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ trans('branche.Update Branche') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -15,13 +15,17 @@
              
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Branche Name:</label>
-                        <input type="text" class="form-control" name="uBrancheName" value="{{ $item->name }}" required>
+                        <label for="exampleInputPassword1">{{ trans('branche.Branche Name English') }}:</label>
+                        <input type="text" class="form-control" name="uBrancheNameEn" value="{{ $item->name }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">{{ trans('branche.Branche Name Arabic') }}:</label>
+                        <input type="text" class="form-control" name="uBrancheNameAr" value="{{ $item->name }}" required>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Update Branche</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('branche.Close') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ trans('branche.Update Branche') }}</button>
                 </div>
             </form>
         </div>

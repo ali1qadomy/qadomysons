@@ -5,22 +5,30 @@
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New Branche</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ trans('product.New Branche') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Product Name:</label>
-                        <input type="text" class="form-control" name="productname" required>
+                        <label for="exampleInputPassword1">{{ trans('product.Product Name English') }}:</label>
+                        <input type="text" class="form-control" name="productnameEn" required>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Product description:</label>
-                        <input type="text" class="form-control" name="productdesc" required>
+                        <label for="exampleInputPassword1">{{ trans('product.Product description English') }}:</label>
+                        <input type="text" class="form-control" name="productdescEn" required>
                     </div>
                     <div class="form-group">
-                        <label for="Subcategory">Product description:</label>
+                        <label for="exampleInputPassword1">{{ trans('product.Product Name Arabic') }}:</label>
+                        <input type="text" class="form-control" name="productnameAr" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">{{ trans('product.Product description Arabic') }}:</label>
+                        <input type="text" class="form-control" name="productdescAr" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Subcategory">{{ trans('product.Sub_Category Name') }}:</label>
                         <select class="form-control" name="ProdSubCategory">
                             @foreach ($scbCat as $cat)
                                 <option value="{{ $cat->id }}">{{ $cat->name }}</option>
@@ -28,10 +36,7 @@
                         </select>
                     </div>
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-outline-secondary" type="button"
-                                id="inputGroupFileAddon03">Button</button>
-                        </div>
+                      
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="inputGroupFile03" name="image"
                                 aria-describedby="inputGroupFileAddon03" required>
@@ -40,8 +45,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add Product</button>
+                    <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">{{ trans('product.Close') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ trans('product.Add Product') }}</button>
                 </div>
             </div>
         </form>

@@ -16,7 +16,7 @@
             <div class="col-md-12 ">
                 <div class="card tablebrache">
                     <div class="card-header">
-                        <h4 class="card-title"> Sub_Category</h4>
+                        <h4 class="card-title">{{ trans('sub_category.Sub_Category') }}</h4>
                     </div>
                     <div class="card-body">
                         @if ($errors->any())
@@ -29,27 +29,27 @@
                             </div>
                         @endif
                         <div class="table-responsive">
-                            <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
+                                cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>id</th>
-                                        <th>name</th>
-                                        <th>description</th>
-                                        <th>Category Name</th>
-                                        <th>Action</th>
+                                        <th>{{ trans('sub_category.id') }}</th>
+                                        <th>{{ trans('sub_category.name') }}</th>
+                                        <th>{{ trans('sub_category.description') }}</th>
+                                        <th>{{ trans('sub_category.Category Name') }}</th>
+                                        <th>{{ trans('sub_category.Action') }}</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>id</th>
-                                        <th>name</th>
-                                        <th>description</th>
-                                        <th>Category Name</th>
-                                        <th>Action</th>
+                                        <th>{{ trans('sub_category.id') }}</th>
+                                        <th>{{ trans('sub_category.name') }}</th>
+                                        <th>{{ trans('sub_category.description') }}</th>
+                                        <th>{{ trans('sub_category.Category Name') }}</th>
+                                        <th>{{ trans('sub_category.Action') }}</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
-
                                     @foreach ($sub as $item)
                                         <tr>
                                             <td>{{ $item->id }}</td>
@@ -58,11 +58,11 @@
                                             <td>{{ $item->category->name }}</td>
                                             <td>
                                                 <a href="" data-target="#updatesub-{{ $item->id }}"
-                                                    data-toggle="modal" class="btn btn-success btn-sm">EDIT</a>
+                                                    data-toggle="modal" class="btn btn-success btn-sm">{{ trans('sub_category.edit') }}</a>
                                                 <a href="" data-target="#deletesub-{{ $item->id }}"
                                                     data-toggle="modal"
                                                     class="btn btn-danger
-                                                     btn-sm">Delete</a>
+                                                     btn-sm">{{ trans('sub_category.delete') }}</a>
                                             </td>
                                         </tr>
                                         @include('subcategory.updatesubcategory')
@@ -74,7 +74,7 @@
                     </div>
                     @include('subcategory.newsub')
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newSub">
-                        Add New Sub_Category
+                        {{ trans('sub_category.Add New Sub_Category') }}
                     </button>
                 </div>
             </div>

@@ -15,26 +15,36 @@
         <div class="row">
             <div class="col-md-12 ">
                 <div class="card tablebrache">
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                     <div class="card-header">
-                        <h4 class="card-title">Category</h4>
+                        <h4 class="card-title">{{ trans('category.categories') }}</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
+                                cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>id</th>
-                                        <th>category name</th>
-                                        <th>category description</th>
-                                        <th>Action</th>
+                                        <th>{{ trans('category.id') }}</th>
+                                        <th>{{ trans('category.category name') }}</th>
+                                        <th>{{ trans('category.category description') }}</th>
+                                        <th>{{ trans('category.action') }}</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>id</th>
-                                        <th>category name</th>
-                                        <th>category description</th>
-                                        <th>Action</th>
+                                        <th>{{ trans('category.id') }}</th>
+                                        <th>{{ trans('category.category name') }}</th>
+                                        <th>{{ trans('category.category description') }}</th>
+                                        <th>{{ trans('category.action') }}</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -46,11 +56,12 @@
                                             <td>{{ $item->description }}</td>
                                             <td>
                                                 <a href="" data-target="#updatecategory-{{ $item->id }}"
-                                                    data-toggle="modal" class="btn btn-success btn-sm">EDIT</a>
+                                                    data-toggle="modal"
+                                                    class="btn btn-success btn-sm">{{ trans('category.edit') }}</a>
                                                 <a href="" data-target="#deletecategory-{{ $item->id }}"
                                                     data-toggle="modal"
                                                     class="btn btn-danger
-                                                     btn-sm">Delete</a>
+                                                     btn-sm">{{ trans('category.delete') }}</a>
                                             </td>
                                         </tr>
                                         @include('category.updatecategory')
@@ -62,7 +73,7 @@
                     </div>
                     @include('category.addnewcategory')
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newcategory">
-                        Add New Category
+                        {{ trans('category.Add New Category') }}
                     </button>
                 </div>
             </div>

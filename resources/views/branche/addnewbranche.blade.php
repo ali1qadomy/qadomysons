@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New Branche</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ trans('branche.New Branche') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,13 +12,18 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Branche Name:</label>
-                        <input type="text" class="form-control" name="BrancheName" required>
+                        <label for="exampleInputPassword1">{{ trans('branche.Branche Name English') }}:</label>
+                        <input type="text" class="form-control" name="BrancheNameEn" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">{{ trans('branche.Branche Name Arabic') }}:</label>
+                        <input type="text" class="form-control" name="BrancheNameAr" required>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add Branche</button>
+                    <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">{{ trans('branche.Close') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ trans('branche.Add Branche') }}</button>
                 </div>
             </form>
         </div>

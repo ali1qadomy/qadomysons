@@ -4,7 +4,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update Sub_Category</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ trans('sub_category.Update Sub_Category') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -15,14 +15,24 @@
                 <input type="hidden" name="updatesub" value="{{ $item->id }}">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Sub_Category Name:</label>
-                        <input type="text" class="form-control" name="usubname" value="{{ $item->name }}" required>
+                        <label for="exampleInputPassword1">{{ trans('sub_category.Sub_Category Name English') }}:</label>
+                        <input type="text" class="form-control" name="usubnameEn" value="{{ $item->name }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Sub_Category description:</label>
-                        <input type="text" class="form-control" name="usubdesc" value="{{ $item->description }}"
+                        <label for="exampleInputPassword1">{{ trans('sub_category.Sub_Category description English') }}:</label>
+                        <input type="text" class="form-control" name="usubdescEn" value="{{ $item->description }}"
                             required>
                     </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">{{ trans('sub_category.Sub_Category Name Arabic') }}:</label>
+                        <input type="text" class="form-control" name="usubnameAr" value="{{ $item->name }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">{{ trans('sub_category.Sub_Category description Arabic') }}:</label>
+                        <input type="text" class="form-control" name="usubdescAr" value="{{ $item->description }}"
+                            required>
+                    
+                </div>
                     <div class="form-group">
                         <select class="custom-select"" aria-label="Default select example" name='ucategorySelect'
                             value="{{ $item->name }}"required>
@@ -35,8 +45,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Update Sub_Category</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('sub_category.Close') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ trans('sub_category.Update Sub_Category') }}</button>
                 </div>
             </form>
         </div>

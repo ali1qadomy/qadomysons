@@ -1,0 +1,28 @@
+<?php
+return[
+"id"=>"هd",
+"product name"=>"Product Name",
+"product description"=>"Product Description",
+"image"=>"Image",
+"Action"=>"Action",
+"Add New Product"=>"Add New Product",
+"EDIT"=>"Edit",
+"Delete"=>"Delete",
+"Product Details"=>"Products",
+"Sub_Category Name"=>"Sub_Category Name",
+"Product Name English"=>"Product Name English",
+"Product description English"=>"Product description English",
+"Product Name Arabic"=>"Product Name Arabic",
+"Product description Arabic"=>"Product description Arabic",
+"Update Product"=>"Update Product",
+"New Branche"=>"",
+"Add Product"=>"Add Product",
+"Close"=>"Close",
+"Delete Product"=>"Delete Product",
+"are you sure to delete this product"=>"are you sure to delete this product",
+""=>"",
+""=>"",
+""=>"",
+""=>"",
+];
+?>

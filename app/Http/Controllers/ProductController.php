@@ -50,9 +50,9 @@ class ProductController extends Controller
     {
         try {
             $newProduct = [
-                'name' => $request->productname,
+                'name' => ['en' => $request->productnameEn, 'ar' => $request->productnameAr],
+                'description' => ['en' => $request->productdescEn, 'ar' => $request->$request->productdescAr],
                 'subcategory_id' => $request->ProdSubCategory,
-                'description' => $request->productdesc,
                 'created_at' => now()
             ];
             $prod_id = DB::table('products')->InsertGetId($newProduct);
@@ -72,10 +72,10 @@ class ProductController extends Controller
             ];
             ModelsImage::create($image);
             Alert::success('Success', 'Success Added new Product');
-            return redirect()->route('product.index');
+          //  return redirect()->route('product.index');
         } catch (\Throwable $th) {
             Alert::error('Failed ', 'Failed To Added');
-            return redirect()->route('product.index');
+           // return redirect()->route('product.index');
         }
     }
 
@@ -112,8 +112,8 @@ class ProductController extends Controller
     {
         try {
             $product = product::where('id', $request->updateproduct)->update([
-                'name' => $request->uproductname,
-                'description' => $request->uproductdesc,
+                'name' => ['en' => $request->uproductnameEn, 'ar' => $request->uproductnameAr],
+                'description' => ['en' => $request->uproductdescEn, 'ar' => $request->$request->uproductdescAr],
                 'subcategory_id' => $request->uProdSubCategory,
             ]);
             if ($request->hasFile('Uimage')) {

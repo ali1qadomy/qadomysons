@@ -17,7 +17,7 @@
             <div class="col-md-12 ">
                 <div class="card tablebrache">
                     <div class="card-header">
-                        <h4 class="card-title">Product Details</h4>
+                        <h4 class="card-title">{{ trans('product.Product Details') }}</h4>
                     </div>
                     @if ($errors->any())
                     <div class="alert alert-danger">
@@ -33,20 +33,20 @@
                             <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>id</th>
-                                        <th>product name</th>
-                                        <th>product description</th>
-                                        <th>image</th>
-                                        <th>Action</th>
+                                        <th>{{ trans('product.id') }}</th>
+                                        <th>{{ trans('product.product name') }}</th>
+                                        <th>{{ trans('product.product description') }}</th>
+                                        <th>{{ trans('product.image') }}</th>
+                                        <th>{{ trans('product.Action') }}</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>id</th>
-                                        <th>product name</th>
-                                        <th>product description</th>
-                                        <th>image</th>
-                                        <th>Action</th>
+                                        <th>{{ trans('product.id') }}</th>
+                                        <th>{{ trans('product.product name') }}</th>
+                                        <th>{{ trans('product.product description') }}</th>
+                                        <th>{{ trans('product.image') }}</th>
+                                        <th>{{ trans('product.Action') }}</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -65,11 +65,11 @@
                                             </td>
                                             <td>
                                                 <a href="" data-target="#updateproduct-{{ $item->id }}"
-                                                    data-toggle="modal" class="btn btn-success btn-sm">EDIT</a>
+                                                    data-toggle="modal" class="btn btn-success btn-sm">{{ trans('product.EDIT') }}</a>
                                                 <a href="" data-target="#deleteproduct-{{ $item->id }}"
                                                     data-toggle="modal"
                                                     class="btn btn-danger
-                                                     btn-sm">Delete</a>
+                                                     btn-sm">{{ trans('product.Delete') }}</a>
                                             </td>
                                         </tr>
                                         @include('product.updateproduct')
@@ -81,7 +81,7 @@
                     </div>
                     @include('product.addproduct')
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newproduct">
-                        Add New Product
+                        {{ trans('product.Add New Product') }}
                     </button>
                 </div>
             </div>

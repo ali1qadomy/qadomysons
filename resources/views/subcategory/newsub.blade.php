@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New Sub_Category</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ trans('sub_category.New Sub_Category') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,12 +12,20 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Sub_Category Name:</label>
-                        <input type="text" class="form-control" name="subname" required>
+                        <label for="exampleInputPassword1">{{ trans('sub_category.Sub_Category Name English') }}:</label>
+                        <input type="text" class="form-control" name="subnameEn" required>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Sub_Category description:</label>
-                        <input type="text" class="form-control" name="subdesc" >
+                        <label for="exampleInputPassword1">{{ trans('sub_category.Sub_Category description English') }}:</label>
+                        <input type="text" class="form-control" name="subdescEn" >
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">{{ trans('sub_category.Sub_Category Name Arabic') }}:</label>
+                        <input type="text" class="form-control" name="subnameAr" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">{{ trans('sub_category.Sub_Category description Arabic') }}:</label>
+                        <input type="text" class="form-control" name="subdescAr" >
                     </div>
                     <div class="form-group">
                         <select  class="custom-select"" aria-label="Default select example" name='categorySelect' required>
@@ -30,8 +38,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add Sub_Category</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('sub_category.Close') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ trans('sub_category.Add Sub_Category') }}</button>
                 </div>
             </form>
         </div>

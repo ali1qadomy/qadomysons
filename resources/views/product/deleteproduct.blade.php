@@ -4,7 +4,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ trans('product.Delete Product') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,11 +14,12 @@
                 @method('delete')
                 <input type="hidden" name="deleteproduct" value="{{ $item->id }}">
                 <div class="modal-body">
-                    you are sure to delete this product
+                    {{ trans('product.are you sure to delete this product') }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Delete Product</button>
+                    <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">{{ trans('product.Close') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ trans('product.Delete Product') }}</button>
                 </div>
             </form>
         </div>

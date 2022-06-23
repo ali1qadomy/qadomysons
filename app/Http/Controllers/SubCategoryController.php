@@ -48,8 +48,8 @@ class SubCategoryController extends Controller
         try {
             $sub = new subCategory();
             $sub->create([
-                'name' => $request->subname,
-                'description' => $request->subdesc,
+                'name' => ['en' => $request->subnameEn, 'ar' => $request->subnameAr],
+                'description' => ['en' => $request->subdescEn, 'ar' => $request->subdescAr],
                 'category_id' => $request->categorySelect
             ]);
             Alert::success('Success', 'Success Add');
@@ -94,8 +94,8 @@ class SubCategoryController extends Controller
         try {
             $subCategory = subCategory::find($request->updatesub);
             $subCategory->update([
-                'name' => $request->usubname,
-                'description' => $request->usubdesc,
+                'name' => ['en' => $request->usubnameEn, 'ar' => $request->usubnameAr],
+                'description' => ['en' => $request->usubdescEn, 'ar' => $request->usubdescAr],
                 'category_id' => $request->ucategorySelect,
             ]);
             Alert::success('Success', 'Success Update');

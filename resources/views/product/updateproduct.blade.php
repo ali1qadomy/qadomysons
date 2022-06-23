@@ -8,24 +8,34 @@
             <input type="hidden" name="updateproduct" value="{{ $item->id }}">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Update Product</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ trans('product.Update Product') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Product Name:</label>
-                        <input type="text" class="form-control" name="uproductname" value="{{ $item->name }}"
+                        <label for="exampleInputPassword1">{{ trans('product.Product Name English') }}:</label>
+                        <input type="text" class="form-control" name="uproductnameEn" value="{{ $item->name }}"
                             required>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Product description:</label>
-                        <input type="text" class="form-control" name="uproductdesc"
+                        <label for="exampleInputPassword1">{{ trans('product.Product description English') }}:</label>
+                        <input type="text" class="form-control" name="uproductdescAr"
                             value="{{ $item->description }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="Subcategory">Category Image:</label>
+                        <label for="exampleInputPassword1">{{ trans('product.Product Name Arabic') }}:</label>
+                        <input type="text" class="form-control" name="uproductnameEn" value="{{ $item->name }}"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">{{ trans('product.Product description Arabic') }}:</label>
+                        <input type="text" class="form-control" name="uproductdescAr"
+                            value="{{ $item->description }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Subcategory">{{ trans('product.Sub_Category Name') }}:</label>
                         <select class="form-control" name="uProdSubCategory" value="{{ $item->category_id }}"
                             required>
                             @foreach ($scbCat as $cat)
@@ -45,8 +55,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Update Product</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('product.Close') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ trans('product.Update Product') }}</button>
                 </div>
             </div>
         </form>

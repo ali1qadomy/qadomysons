@@ -44,7 +44,7 @@ class BrancheController extends Controller
         try {
             $branche = new branche();
             $branche->create([
-                'name' => $request->BrancheName,
+                'name' => ['en' => $request->BrancheNameEn, 'ar' => $request->BrancheNameAr]
             ]);
             Alert::Success('Success', 'Success Add');
             return redirect()->back();
@@ -87,7 +87,7 @@ class BrancheController extends Controller
     {
         try {
             $branche->update([
-                'name' => $request->uBrancheName,
+                'name' => ['en' => $request->uBrancheNameEn, 'ar' => $request->uBrancheNameAr]
             ]);
             Alert::success('Success', 'Success Update');
             return redirect()->back();
@@ -105,14 +105,14 @@ class BrancheController extends Controller
      */
     public function destroy(branche $branche, Request $request)
     {
-      try {
-        $branche = branche::where('id', $request->deletebranche)->first();
-        $branche->delete();
-        Alert::success('Success','Success Delete');
-        return redirect()->back();
-      } catch (\Throwable $th) {
-        Alert::error('Failed','Failed Delete');
-        return redirect()->back();
-      }
+        try {
+            $branche = branche::where('id', $request->deletebranche)->first();
+            $branche->delete();
+            Alert::success('Success', 'Success Delete');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            Alert::error('Failed', 'Failed Delete');
+            return redirect()->back();
+        }
     }
 }

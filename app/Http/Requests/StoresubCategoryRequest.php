@@ -24,16 +24,11 @@ class StoresubCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'description' => 'bail|min:5|required'
+            'subnameEn' => 'required',
+            'subnameAr'=>'required',
+            'subdescEn'=>'required',
+            'subdescAr' => 'required',
         ];
     }
-    public function messages()
-    {
-        return [
-            'name.required' => "subcategory name is required",
-            'description.min' => "name of subcategory must be larger than 5 chars",
-            'description.required' => 'description is requireds',
-        ];
-    }
+ 
 }
