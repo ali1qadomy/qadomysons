@@ -4,16 +4,19 @@
         <!-- User profile -->
         <div class="user-profile">
             <!-- User profile image -->
-            <div class="profile-img"> <img src="{{asset('admin/assets/images/users/profile.png')}}" alt="user" />
+            <div class="profile-img"> <img src="{{ asset('admin/assets/images/users/profile.png') }}" alt="user" />
                 <!-- this is blinking heartbit-->
                 <div class="notify setpos"> <span class="heartbit"></span> <span class="point"></span> </div>
             </div>
             <!-- User profile text-->
             <div class="profile-text">
                 <h5>{{ auth::user()->name }}</h5>
-                <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"><i class="mdi mdi-settings"></i></a>
-                <a href="app-email.html" class="" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
-                <a href="pages-login.html" class="" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
+                <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button"
+                    aria-haspopup="true" aria-expanded="true"><i class="mdi mdi-settings"></i></a>
+                <a href="app-email.html" class="" data-toggle="tooltip" title="Email"><i
+                        class="mdi mdi-gmail"></i></a>
+                <a href="pages-login.html" class="" data-toggle="tooltip" title="Logout"><i
+                        class="mdi mdi-power"></i></a>
                 <div class="dropdown-menu animated flipInY">
                     <!-- text-->
                     <a href="#" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
@@ -39,15 +42,18 @@
             <ul id="sidebarnav">
                 <li class="nav-devider"></li>
                 <li class="nav-small-cap">PERSONAL</li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                            class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard <span
+                                class="label label-rouded label-themecolor pull-right">4</span></span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="index.html">Minimal </a></li>
-                        <li><a href="index2.html">Analytical</a></li>
-                        <li><a href="index3.html">Demographical</a></li>
-                        <li><a href="index4.html">Modern</a></li>
+                        <li><a href="branche">Branches </a></li>
+                        <li><a href="category">Category</a></li>
+                        <li><a href="subcategory">Sub_Category</a></li>
+                        <li><a href="product">Product</a></li>
                     </ul>
                 </li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Apps</span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                            class="mdi mdi-bullseye"></i><span class="hide-menu">Apps</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="app-calendar.html">Calendar</a></li>
                         <li><a href="app-chat.html">Chat app</a></li>
@@ -57,14 +63,17 @@
                         <li><a href="app-contact-detail.html">Contact Detail</a></li>
                     </ul>
                 </li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-email"></i><span class="hide-menu">Inbox</span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                            class="mdi mdi-email"></i><span class="hide-menu">Inbox</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="app-email.html">Mailbox</a></li>
                         <li><a href="app-email-detail.html">Mailbox Detail</a></li>
                         <li><a href="app-compose.html">Compose Mail</a></li>
                     </ul>
                 </li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Ui Elements <span class="label label-rouded label-danger pull-right">25</span></span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                            class="mdi mdi-chart-bubble"></i><span class="hide-menu">Ui Elements <span
+                                class="label label-rouded label-danger pull-right">25</span></span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="ui-cards.html">Cards</a></li>
                         <li><a href="ui-user-card.html">User Cards</a></li>
@@ -95,7 +104,8 @@
                     </ul>
                 </li>
                 <li class="nav-small-cap">FORMS, TABLE &amp; WIDGETS</li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">Forms</span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                            class="mdi mdi-file"></i><span class="hide-menu">Forms</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="form-basic.html">Basic Forms</a></li>
                         <li><a href="form-layout.html">Form Layouts</a></li>
@@ -117,7 +127,8 @@
                         <li><a href="form-tinymce.html">Tinymce Editor</a></li>
                     </ul>
                 </li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-table"></i><span class="hide-menu">Tables</span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                            class="mdi mdi-table"></i><span class="hide-menu">Tables</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="table-basic.html">Basic Tables</a></li>
                         <li><a href="table-layout.html">Table Layouts</a></li>
@@ -129,14 +140,16 @@
                         <li><a href="table-editable-table.html">Editable Table</a></li>
                     </ul>
                 </li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-widgets"></i><span class="hide-menu">Widgets</span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                            class="mdi mdi-widgets"></i><span class="hide-menu">Widgets</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="widget-apps.html">Data Widgets</a></li>
                         <li><a href="widget-data.html">Statestic Widgets</a></li>
                     </ul>
                 </li>
                 <li class="nav-small-cap">EXTRA COMPONENTS</li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-book-multiple"></i><span class="hide-menu">Page Layout</span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                            class="mdi mdi-book-multiple"></i><span class="hide-menu">Page Layout</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="layout-single-column.html">1 Column</a></li>
                         <li><a href="layout-fix-header.html">Fix header</a></li>
@@ -146,11 +159,14 @@
                         <li><a href="layout-logo-center.html">Logo in Center</a></li>
                     </ul>
                 </li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-book-open-variant"></i><span class="hide-menu">Sample Pages <span class="label label-rouded label-success pull-right">25</span></span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                            class="mdi mdi-book-open-variant"></i><span class="hide-menu">Sample Pages <span
+                                class="label label-rouded label-success pull-right">25</span></span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="starter-kit.html">Starter Kit</a></li>
                         <li><a href="pages-blank.html">Blank page</a></li>
-                        <li><a href="#" class="has-arrow">Authentication <span class="label label-rounded label-success">6</span></a>
+                        <li><a href="#" class="has-arrow">Authentication <span
+                                    class="label label-rounded label-success">6</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="pages-login.html">Login 1</a></li>
                                 <li><a href="pages-login-2.html">Login 2</a></li>
@@ -184,7 +200,8 @@
                         </li>
                     </ul>
                 </li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-file-chart"></i><span class="hide-menu">Charts</span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                            class="mdi mdi-file-chart"></i><span class="hide-menu">Charts</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="chart-morris.html">Morris Chart</a></li>
                         <li><a href="chart-chartist.html">Chartis Chart</a></li>
@@ -197,7 +214,8 @@
                         <li><a href="chart-peity.html">Peity Charts</a></li>
                     </ul>
                 </li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-brush"></i><span class="hide-menu">Icons</span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                            class="mdi mdi-brush"></i><span class="hide-menu">Icons</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="icon-material.html">Material Icons</a></li>
                         <li><a href="icon-fontawesome.html">Fontawesome Icons</a></li>
@@ -208,13 +226,16 @@
                         <li><a href="icon-flag.html">Flag Icons</a></li>
                     </ul>
                 </li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-map-marker"></i><span class="hide-menu">Maps</span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                            class="mdi mdi-map-marker"></i><span class="hide-menu">Maps</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="map-google.html">Google Maps</a></li>
                         <li><a href="map-vector.html">Vector Maps</a></li>
                     </ul>
                 </li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">Multi level dd</span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                            class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">Multi level
+                            dd</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="#">item 1.1</a></li>
                         <li><a href="#">item 1.2</a></li>

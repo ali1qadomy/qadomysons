@@ -10,7 +10,7 @@ class product extends Model
 {
     use HasFactory;
     use HasTranslations;
-    public $translatable  = ['name', 'description'];
+    protected $translatable  = ['name', 'description'];
     protected $fillable = ['name', 'description', 'subcategory_id'];
     public function subcategory()
     {

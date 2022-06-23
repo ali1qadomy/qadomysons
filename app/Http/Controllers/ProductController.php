@@ -50,11 +50,12 @@ class ProductController extends Controller
     {
         try {
             $newProduct = [
-                'name' => ['en' => $request->productnameEn, 'ar' => $request->productnameAr],
-                'description' => ['en' => $request->productdescEn, 'ar' => $request->$request->productdescAr],
+                'name' => collect(['en' => $request->productnameEn, 'ar' => $request->productnameAr])->toJson(),
                 'subcategory_id' => $request->ProdSubCategory,
-                'created_at' => now()
+                'description' => collect(['en' => $request->productdescEn, 'ar' => $request->productdescAr])->toJson(),
+                'created_at' => now(),
             ];
+            return $newProduct;
             $prod_id = DB::table('products')->InsertGetId($newProduct);
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
@@ -65,6 +66,7 @@ class ProductController extends Controller
                 $filethumbo->save(public_path('/images/Thumbo/' . $newFile), 100);
                 $filebig->save(public_path('/images/' . $newFile), 100);
             }
+
             $image = [
                 'url' => $newFile,
                 'imageable_type' => 'App\Models\product',
@@ -72,13 +74,12 @@ class ProductController extends Controller
             ];
             ModelsImage::create($image);
             Alert::success('Success', 'Success Added new Product');
-          //  return redirect()->route('product.index');
+            return redirect()->route('product.index');
         } catch (\Throwable $th) {
             Alert::error('Failed ', 'Failed To Added');
-           // return redirect()->route('product.index');
+            return redirect()->route('product.index');
         }
     }
-
     /**
      * Display the specified resource.
      *
