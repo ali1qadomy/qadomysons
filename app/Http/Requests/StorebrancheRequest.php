@@ -24,7 +24,15 @@ class StorebrancheRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'BrancheNameEn'=>'required',
+            'BrancheNameAr'=>'required'
+        ];
+    }
+    public function messages()
+    {
+        return[
+            'BrancheNameEn.required'=>'branche name in english required',
+            'BrancheNameAr.required'=>'branche name in Arabic required', 
         ];
     }
 }

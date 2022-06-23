@@ -24,7 +24,21 @@ class StorecategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'categoryNameEn' => 'required|unique:categories,name',
+            'categoryNameAr' => 'required|unique:categories,name',
+            'categoryDescEn' => 'required',
+            'categoryDescAr' => 'required',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'categoryNameEn.required' => 'category name is require',
+            'categoryNameEn.unique' => 'category name exists',
+            'categoryNameAr.required' => 'category name is require',
+            'categoryNameAr.unique' => 'category name exists',
+            'categoryDescEn.required' => 'category description in english is required',
+            'categoryDescAr.required' => 'category description in arabic is required'
         ];
     }
 }

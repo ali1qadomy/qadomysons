@@ -30,5 +30,6 @@ class StoresubCategoryRequest extends FormRequest
             'subdescAr' => 'required',
         ];
     }
+    
  
 }
