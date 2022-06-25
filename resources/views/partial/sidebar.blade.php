@@ -19,7 +19,7 @@
                         class="mdi mdi-power"></i></a>
                 <div class="dropdown-menu animated flipInY">
                     <!-- text-->
-                    <a href="#" class="dropdown-item"><i class="ti-user"></i> {{ trans('sidebar.My Profile') }}</a>
+                    <a href="profile" class="dropdown-item"><i class="ti-user"></i> {{ trans('sidebar.My Profile') }}</a>
                     <!-- text-->
                     <a href="#" class="dropdown-item"><i class="ti-wallet"></i> {{ trans('sidebar.My Balance') }}</a>
                     <!-- text-->

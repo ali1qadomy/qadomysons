@@ -3,7 +3,9 @@
 use App\Http\Controllers\BrancheController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\profileController;
 use App\Http\Controllers\SubCategoryController;
+use App\Models\Role;
 use App\Models\subCategory;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +43,7 @@ Route::group(
             Route::resource('/category', CategoryController::class);
             Route::resource('/subcategory', SubCategoryController::class);
             Route::resource('/product', ProductController::class);
+            Route::get('/profile',[profileController::class,'index'])->name('index');
         });
     }
 );
