@@ -14,6 +14,6 @@ class category extends Model
     public $translatable  = ['name','description'];
     public function subcategory()
     {
-        return $this->hasMany(subCategory::class);
+        return $this->hasMany(subCategory::class,'id','category_id');
     }
 }

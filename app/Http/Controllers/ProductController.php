@@ -55,7 +55,7 @@ class ProductController extends Controller
                 'description' => collect(['en' => $request->productdescEn, 'ar' => $request->productdescAr])->toJson(),
                 'created_at' => now(),
             ];
-            return $newProduct;
+            
             $prod_id = DB::table('products')->InsertGetId($newProduct);
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
@@ -75,8 +75,8 @@ class ProductController extends Controller
             ModelsImage::create($image);
             Alert::success('Success', 'Success Added new Product');
             return redirect()->route('product.index');
-        } catch (\Throwable $th) {
-            Alert::error('Failed ', 'Failed To Added');
+        } catch (\Exception $th) {
+            Alert::error('Failed ', $th->getMessage());
             return redirect()->route('product.index');
         }
     }
@@ -159,12 +159,12 @@ class ProductController extends Controller
                 unlink(public_path('/images/Thumbo/' . $image));
                 $product = product::find($request->deleteproduct)->delete();
                 DB::table('images')->where('imageable_id', $request->deleteproduct)->delete();
-                Alert::error('Success', 'Success To Delete');
+                Alert::success('Success', 'Success To Delete');
                 return redirect()->route('product.index');
             } else {
                 $product = product::find($request->deleteproduct)->delete();
                 DB::table('images')->where('imageable_id', $request->deleteproduct)->delete();
-                Alert::error('Success', 'There\'s no image To Delete In File');
+                Alert::success('Success', 'There\'s no image To Delete In File');
                 return redirect()->route('product.index');
             }
         } catch (\Throwable $th) {

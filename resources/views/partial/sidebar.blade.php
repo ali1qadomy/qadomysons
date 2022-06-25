@@ -13,25 +13,25 @@
                 <h5>{{ auth::user()->name }}</h5>
                 <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button"
                     aria-haspopup="true" aria-expanded="true"><i class="mdi mdi-settings"></i></a>
-                <a href="app-email.html" class="" data-toggle="tooltip" title="Email"><i
+                <a href="app-email.html" class="" data-toggle="tooltip" title="{{ trans('sidebar.Email') }}"><i
                         class="mdi mdi-gmail"></i></a>
-                <a href="pages-login.html" class="" data-toggle="tooltip" title="Logout"><i
+                <a href="pages-login.html" class="" data-toggle="tooltip" title="{{ trans('sidebar.Logout') }}"><i
                         class="mdi mdi-power"></i></a>
                 <div class="dropdown-menu animated flipInY">
                     <!-- text-->
-                    <a href="#" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
+                    <a href="#" class="dropdown-item"><i class="ti-user"></i> {{ trans('sidebar.My Profile') }}</a>
                     <!-- text-->
-                    <a href="#" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
+                    <a href="#" class="dropdown-item"><i class="ti-wallet"></i> {{ trans('sidebar.My Balance') }}</a>
                     <!-- text-->
-                    <a href="#" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
-                    <!-- text-->
-                    <div class="dropdown-divider"></div>
-                    <!-- text-->
-                    <a href="#" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
+                    <a href="#" class="dropdown-item"><i class="ti-email"></i> {{ trans('sidebar.Inbox') }}</a>
                     <!-- text-->
                     <div class="dropdown-divider"></div>
                     <!-- text-->
-                    <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+                    <a href="#" class="dropdown-item"><i class="ti-settings"></i> {{ trans('sidebar.Account Setting') }}</a>
+                    <!-- text-->
+                    <div class="dropdown-divider"></div>
+                    <!-- text-->
+                    <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i> {{ trans('sidebar.Logout') }}</a>
                     <!-- text-->
                 </div>
             </div>
@@ -41,15 +41,15 @@
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
                 <li class="nav-devider"></li>
-                <li class="nav-small-cap">PERSONAL</li>
+                <li class="nav-small-cap">{{ trans('sidebar.PERSONAL') }}</li>
                 <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
-                            class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard <span
+                            class="mdi mdi-gauge"></i><span class="hide-menu">{{ trans('sidebar.Dashboard') }} <span
                                 class="label label-rouded label-themecolor pull-right">4</span></span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="branche">Branches </a></li>
-                        <li><a href="category">Category</a></li>
-                        <li><a href="subcategory">Sub_Category</a></li>
-                        <li><a href="product">Product</a></li>
+                        <li><a href="branche">{{ trans('sidebar.Branches') }} </a></li>
+                        <li><a href="category">{{ trans('sidebar.Categories') }}</a></li>
+                        <li><a href="subcategory">{{ trans('sidebar.Sub_Category') }}</a></li>
+                        <li><a href="product">{{ trans('sidebar.Product') }}</a></li>
                     </ul>
                 </li>
                 <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-           
             $table->bigInteger('subcategory_id');
+      
             $table->timestamps();
         });
     }
