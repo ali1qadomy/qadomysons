@@ -10,7 +10,6 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
-
                             <div class="row mb-3">
                                 <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
@@ -71,22 +70,32 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="email"
+                                <label for="branch_id"
                                     class="col-md-4 col-form-label text-md-end">{{ __('branch ') }}</label>
-
                                 <div class="col-md-6">
-                                    <select name="branche_id" class="form-select" aria-label="Default select example">
-                                        <option  selected >Open this select menu</option>
+                                    <select name="branche_id" id="branche_id" class="form-select" aria-label="Default select example">
+                                        <option selected>Open this select menu</option>
                                         @foreach (branch() as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                                         @endforeach
                                     </select>
-
                                     @error('branch_id')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="role"
+                                class="col-md-4 col-form-label text-md-end">{{ __('role ') }}</label>
+                                <div class="col-md-6">
+                                    <select name="role_id" id="role" class="form-select" aria-label="Default select example">
+                                        <option selected>Open this select roles</option>
+                                        @foreach (roles() as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="row mb-0">

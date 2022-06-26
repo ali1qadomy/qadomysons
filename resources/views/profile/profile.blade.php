@@ -53,7 +53,10 @@
                     <!--second tab-->
                     <div class="tab-pane" id="settings" role="tabpanel">
                         <div class="card-body">
-                            <form class="form-horizontal form-material">
+
+                            <form class="form-horizontal form-material" method="post"
+                                action="{{ route('profile.editUser') }}">
+                                @csrf
                                 <div class="form-group">
                                     <label class="col-md-12">Full Name</label>
                                     <div class="col-md-12">
@@ -77,22 +80,16 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-12">branche</label>
-                                    <div class="col-md-12">
-                                        <input type="text"
-                                            placeholder="
-                                            @foreach ($branche as $i) {{ $i->name }} @endforeach"
-                                            class="form-control form-control-line">
-                                    </div>
-                                </div>
-                                <div class="form-group">
                                     <div class="col-sm-12">
-                                        <button class="btn btn-success">Update Profile</button>
+                                        <input type="submit" class="btn btn-success"
+                                            value="Update
+                                        Profile">
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

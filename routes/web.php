@@ -5,10 +5,12 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\testController;
 use App\Models\Role;
 use App\Models\subCategory;
+use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
-
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +45,10 @@ Route::group(
             Route::resource('/category', CategoryController::class);
             Route::resource('/subcategory', SubCategoryController::class);
             Route::resource('/product', ProductController::class);
-            Route::get('/profile',[profileController::class,'index'])->name('index');
+            Route::get('/profile', [profileController::class, 'index'])->name('index');
+            //      Route::post('/profile', [profileController::class, 'update'])->name('profile.edit');            
+            Route::post('/profile', [profileController::class, 'editUser'])->name('profile.editUser');
+            Route::get('/test', [testController::class, 'test'])->name('test');
         });
     }
 );
