@@ -54,9 +54,11 @@
                     <div class="tab-pane" id="settings" role="tabpanel">
                         <div class="card-body">
 
-                            <form class="form-horizontal form-material" method="post"
-                                action="{{ route('profile.editUser') }}">
+                            <form class="form-horizontal form-material" method="POST"
+                                action="{{ route('profile.editUser', $userInfo->id) }}">
                                 @csrf
+                                @method('PUT')
+                                <input type="hidden" name="userupdate" value="{{ $userInfo->id }}">
                                 <div class="form-group">
                                     <label class="col-md-12">Full Name</label>
                                     <div class="col-md-12">
@@ -68,7 +70,7 @@
                                     <label for="example-email" class="col-md-12">Email</label>
                                     <div class="col-md-12">
                                         <input type="email" placeholder="{{ $userInfo->email }}"
-                                            class="form-control form-control-line" name="example-email" name="email"
+                                            class="form-control form-control-line"  name="email"
                                             required>
                                     </div>
                                 </div>

@@ -47,7 +47,7 @@ Route::group(
             Route::resource('/product', ProductController::class);
             Route::get('/profile', [profileController::class, 'index'])->name('index');
             //      Route::post('/profile', [profileController::class, 'update'])->name('profile.edit');            
-            Route::post('/profile', [profileController::class, 'editUser'])->name('profile.editUser');
+            Route::PUT('/profile/{id}', [profileController::class, 'editUser'])->name('profile.editUser');
             Route::get('/test', [testController::class, 'test'])->name('test');
         });
     }

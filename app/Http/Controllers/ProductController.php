@@ -55,7 +55,6 @@ class ProductController extends Controller
                 'description' => collect(['en' => $request->productdescEn, 'ar' => $request->productdescAr])->toJson(),
                 'created_at' => now(),
             ];
-            
             $prod_id = DB::table('products')->InsertGetId($newProduct);
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
@@ -66,7 +65,6 @@ class ProductController extends Controller
                 $filethumbo->save(public_path('/images/Thumbo/' . $newFile), 100);
                 $filebig->save(public_path('/images/' . $newFile), 100);
             }
-
             $image = [
                 'url' => $newFile,
                 'imageable_type' => 'App\Models\product',
