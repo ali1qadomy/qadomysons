@@ -20,9 +20,9 @@ return[
 "Close"=>"اغلاق",
 "Delete Product"=>"حذف منتج",
 "are you sure to delete this product"=>"هل انت متأكد من حذف المنتج",
-""=>"",
-""=>"",
-""=>"",
+"barCode"=>"باركود",
+"quantity"=>"الكمية",
+"avaliability"=>"متوفر/غير متوفر",
 ""=>"",
 
 

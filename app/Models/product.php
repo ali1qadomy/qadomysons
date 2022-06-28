@@ -11,10 +11,10 @@ class product extends Model
     use HasFactory;
     use HasTranslations;
     protected $translatable  = ['name', 'description'];
-    protected $fillable = ['name', 'description', 'subcategory_id'];
+    protected $fillable = ['name', 'description', 'subcategoryid', 'quantity', 'avaliabilty', 'barCode'];
     public function subcategory()
     {
-        return $this->belongsTo(subCategory::class,'subcategory_id','id');
+        return $this->belongsTo(subCategory::class, 'subcategoryid', 'id');
     }
     public function image()
     {

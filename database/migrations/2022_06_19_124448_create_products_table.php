@@ -17,8 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->bigInteger('subcategory_id');
-      
+            $table->unsignedBigInteger('subcategoryid');
+            $table->bigInteger('quantity');
+            $table->boolean('avaliabilty');
+            $table->string('barCode');
             $table->timestamps();
         });
     }

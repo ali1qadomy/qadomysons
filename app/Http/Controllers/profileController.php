@@ -13,9 +13,10 @@ class profileController extends Controller
 {
     public function index()
     {
-        $userInfo = Auth::user();
-        $branche = branche::where('id', $userInfo->branche_id)->get();
-        return view('profile.profile', compact('userInfo', 'branche'));
+       // $userInfo = Auth::user();
+        $branche = branche::where('id', Auth::user()->branche_id)->get();
+        return view('profile.profile', compact('branche'));
+      // return $userInfo;
     }
     public function editUser(Request $request, User $user)
     {

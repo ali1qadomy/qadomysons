@@ -24,7 +24,7 @@
                     <hr>
                 </div>
                 <div class="card-body"> <small class="text-muted">Email address </small>
-                    <h6>{{ auth::user()->email }}</h6> <small class="text-muted p-t-30 db">Phone</small>
+                    <h6>{{ Auth::user()->email }}</h6> <small class="text-muted p-t-30 db">Phone</small>
                     <h6>+91 654 784 547</h6> <small class="text-muted p-t-30 db">Address</small>
                     <h6>71 Pilgrim Avenue Chevy Chase, MD 20815</h6>
                     <div class="map-box">
@@ -55,21 +55,21 @@
                         <div class="card-body">
 
                             <form class="form-horizontal form-material" method="POST"
-                                action="{{ route('profile.editUser', $userInfo->id) }}">
+                                action="{{ route('profile.editUser', Auth::user()->id) }}">
                                 @csrf
                                 @method('PUT')
-                                <input type="hidden" name="userupdate" value="{{ $userInfo->id }}">
+                                <input type="hidden" name="userupdate" value="{{ Auth::user()->id }}">
                                 <div class="form-group">
                                     <label class="col-md-12">Full Name</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="{{ $userInfo->name }}"
+                                        <input type="text" placeholder="{{ Auth::user()->name }}"
                                             class="form-control form-control-line" name="fullName" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="example-email" class="col-md-12">Email</label>
                                     <div class="col-md-12">
-                                        <input type="email" placeholder="{{ $userInfo->email }}"
+                                        <input type="email" placeholder="{{ Auth::user()->email }}"
                                             class="form-control form-control-line"  name="email"
                                             required>
                                     </div>

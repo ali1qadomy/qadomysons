@@ -9,9 +9,12 @@ use App\Models\image as ModelsImage;
 use App\Models\subCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Exists;
+
 use RealRashid\SweetAlert\Facades\Alert as Alert;
 
 
@@ -51,31 +54,38 @@ class ProductController extends Controller
         try {
             $newProduct = [
                 'name' => collect(['en' => $request->productnameEn, 'ar' => $request->productnameAr])->toJson(),
-                'subcategory_id' => $request->ProdSubCategory,
+                'subcategoryid' => $request->ProdSubCategory,
                 'description' => collect(['en' => $request->productdescEn, 'ar' => $request->productdescAr])->toJson(),
+                'quantity' => $request->quantity,
+                'avaliabity' => $request->avaliable,
+                'barCode' => $request->barcode,
                 'created_at' => now(),
             ];
             $prod_id = DB::table('products')->InsertGetId($newProduct);
             if ($request->hasFile('image')) {
-                $file = $request->file('image');
-                $ext = $file->getClientOriginalExtension();
-                $newFile = Str::random(8) . '.' . $ext;
-                $filebig = Image::make($file)->resize(300, 300);
-                $filethumbo = Image::make($file)->resize(50, 50);
-                $filethumbo->save(public_path('/images/Thumbo/' . $newFile), 100);
-                $filebig->save(public_path('/images/' . $newFile), 100);
+                $files = $request->file('image');
+                foreach ($files as $file) {
+                    $ext = $file->getClientOriginalExtension();
+                    $newFile = Str::random(8) . '.' . $ext;
+                    $filebig = Image::make($file)->resize(300, 300);
+                    $filethumbo = Image::make($file)->resize(50, 50);
+                    $filethumbo->save(public_path('/images/Thumbo/' . $newFile), 100);
+                    $filebig->save(public_path('/images/' . $newFile), 100);
+                    $image = [
+                        'url' => $newFile,
+                        'imageable_type' => 'App\Models\product',
+                        'imageable_id' => $prod_id,
+                    ];
+                    ModelsImage::create($image);
+                }
             }
-            $image = [
-                'url' => $newFile,
-                'imageable_type' => 'App\Models\product',
-                'imageable_id' => $prod_id,
-            ];
-            ModelsImage::create($image);
+
             Alert::success('Success', 'Success Added new Product');
             return redirect()->route('product.index');
         } catch (\Exception $th) {
-            Alert::error('Failed ', $th->getMessage());
-            return redirect()->route('product.index');
+            return $th;
+          //  Alert::error('Failed ', $th->getMessage());
+         //   return redirect()->route('product.index');
         }
     }
     /**
@@ -113,23 +123,26 @@ class ProductController extends Controller
             $product = product::where('id', $request->updateproduct)->update([
                 'name' => ['en' => $request->uproductnameEn, 'ar' => $request->uproductnameAr],
                 'description' => ['en' => $request->uproductdescEn, 'ar' => $request->$request->uproductdescAr],
-                'subcategory_id' => $request->uProdSubCategory,
+                'subcategoryid' => $request->uProdSubCategory,
             ]);
             if ($request->hasFile('Uimage')) {
-                $file = $request->file('Uimage');
-                $ext = $file->getClientOriginalExtension();
-                $newFile = time() . '.' . $ext;
-                $filebig = Image::make($file)->resize(300, 300);
-                $filethumbo = Image::make($file)->resize(50, 50);
-                $filebig->save(public_path('/images/' . $newFile), 80);
-                $filethumbo->save(public_path('/images/Thumbo/' . $newFile), 80);
+                $files = $request->file('Uimage');
+                foreach ($files as $file) {
+                    $ext = $file->getClientOriginalExtension();
+                    $newFile = time() . '.' . $ext;
+                    $filebig = Image::make($file)->resize(300, 300);
+                    $filethumbo = Image::make($file)->resize(50, 50);
+                    $filebig->save(public_path('/images/' . $newFile), 80);
+                    $filethumbo->save(public_path('/images/Thumbo/' . $newFile), 80);
+                    $image = [
+                        'url' => $newFile,
+                        'imageable_type' => 'App\Models\product',
+                        'imageable_id' => $request->updateproduct,
+                    ];
+                    DB::table('images')->where('imageable_id', $request->updateproduct)->update($image);
+                }
             }
-            $image = [
-                'url' => $newFile,
-                'imageable_type' => 'App\Models\product',
-                'imageable_id' => $request->updateproduct,
-            ];
-            DB::table('images')->where('imageable_id', $request->updateproduct)->update($image);
+
             Alert::success('Success', 'Success Update Product');
             return redirect()->route('product.index');
         } catch (\Throwable $th) {
@@ -147,25 +160,24 @@ class ProductController extends Controller
     public function destroy(product $product, Request $request)
     {
         try {
-
-            $image_path = DB::table('images')->where('imageable_id', $request->deleteproduct)->get();
+            $image_path = ModelsImage::where('imageable_id', $request->deleteproduct)->pluck('url');
             foreach ($image_path as $i) {
-                $image = $i->url;
+                if (File::exists(public_path('/images/' . $i)) || File::exists(public_path('/images/Thumbo/' . $i))) {
+                    File::delete(public_path('/images/' . $i));
+                    File::delete(public_path('/images/Thumbo/' . $i));
+                    ModelsImage::where('imageable_id', $request->deleteproduct)->delete();
+                } else {
+                    modelsImage::table('images')->where('imageable_id', $request->deleteproduct)->delete();
+                    $product = product::find($request->deleteproduct)->delete();
+                    Alert::success('Success', 'There\'s no image To Delete In file');
+                    return redirect()->route('product.index');
+                }
             }
-            if (file_exists(public_path('/images/' . $image)) || file_exists(public_path('/images/Thumbo/' . $image))) {
-                unlink(public_path('/images/' . $image));
-                unlink(public_path('/images/Thumbo/' . $image));
-                $product = product::find($request->deleteproduct)->delete();
-                DB::table('images')->where('imageable_id', $request->deleteproduct)->delete();
-                Alert::success('Success', 'Success To Delete');
-                return redirect()->route('product.index');
-            } else {
-                $product = product::find($request->deleteproduct)->delete();
-                DB::table('images')->where('imageable_id', $request->deleteproduct)->delete();
-                Alert::success('Success', 'There\'s no image To Delete In File');
-                return redirect()->route('product.index');
-            }
-        } catch (\Throwable $th) {
+            $product = product::find($request->deleteproduct)->delete();
+            Alert::success('Success', 'Success To Delete');
+            return redirect()->route('product.index');
+        } catch (\Exception $th) {
+            return $th;
             Alert::error('Failed', 'Failed To Delete');
             return redirect()->route('product.index');
         }

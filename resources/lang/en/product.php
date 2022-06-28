@@ -1,6 +1,6 @@
 <?php
 return[
-"id"=>"هd",
+"id"=>"id",
 "product name"=>"Product Name",
 "product description"=>"Product Description",
 "image"=>"Image",
@@ -20,9 +20,9 @@ return[
 "Close"=>"Close",
 "Delete Product"=>"Delete Product",
 "are you sure to delete this product"=>"are you sure to delete this product",
-""=>"",
-""=>"",
-""=>"",
+"avaliability"=>"avaliability",
+"barCode"=>"barCode",
+"avaliability"=>"avaliability",
 ""=>"",
 ];
 ?>

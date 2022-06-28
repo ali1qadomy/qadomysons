@@ -13,7 +13,7 @@ class subCategory extends Model
     protected $fillable = ['name', 'description', 'category_id'];
     public function category()
     {
-        return $this->belongsTo(category::class);
+        return $this->belongsTo(category::class,'Category_id','id');
     }
     
     public function product()

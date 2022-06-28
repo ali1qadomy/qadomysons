@@ -23,8 +23,8 @@ class SubCategoryController extends Controller
     {
         $sub = subCategory::with('category')->get();
         $cat = category::all();
-        return view('subcategory.subcategory', compact('sub', 'cat'));
-    }
+       return view('subcategory.subcategory', compact('sub', 'cat'));
+        }
 
     /**
      * Show the form for creating a new resource.

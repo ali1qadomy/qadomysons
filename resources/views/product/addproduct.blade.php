@@ -28,18 +28,34 @@
                         <input type="text" class="form-control" name="productdescAr" required>
                     </div>
                     <div class="form-group">
+                        <label for="exampleInputPassword1">{{ trans('product.barCode') }}:</label>
+                        <input type="text" class="form-control" name="barcode" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">{{ trans('product.quantity') }}:</label>
+                        <input type="number" class="form-control" name="quantity" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ava">{{ trans('product.avaliability') }}:</label>
+                        <select class="form-control" name="avaliable" id="ava">
+                            <option selected>avaliability</option>
+                            <option value="0">Yes</option>
+                            <option value="1">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="Subcategory">{{ trans('product.Sub_Category Name') }}:</label>
                         <select class="form-control" name="ProdSubCategory">
+                            <option selected>Choose sub_category</option>
                             @foreach ($scbCat as $cat)
                                 <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="input-group mb-3">
-                      
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="inputGroupFile03" name="image"
-                                aria-describedby="inputGroupFileAddon03" required>
+                            <input type="file" class="custom-file-input" id="inputGroupFile03" name="image[]"
+                                aria-describedby="inputGroupFileAddon03" multiple>
                             <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
                         </div>
                     </div>
