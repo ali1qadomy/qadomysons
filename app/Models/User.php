@@ -6,13 +6,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Laravel\Passport\HasApiTokens;
 use Laratrust\Traits\LaratrustUserTrait;
-use SebastianBergmann\CodeUnit\FunctionUnit;
+
 
 class User extends Authenticatable
 {
-    use LaratrustUserTrait;
+        use LaratrustUserTrait;
     use HasApiTokens, HasFactory, Notifiable;
 
     public function branche(){
@@ -48,5 +48,5 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-  
+
 }

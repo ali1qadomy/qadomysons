@@ -37,9 +37,10 @@
                                         <th>{{ trans('product.id') }}</th>
                                         <th>{{ trans('product.product name') }}</th>
                                         <th>{{ trans('product.product description') }}</th>
-                                        <th> quantity</th>
-                                        <th> avaliabilty</th>
-                                        <th> barcode</th>
+                                        <th>{{ trans('product.quantity') }} </th>
+                                        <th>{{ trans('product.boxFilling') }} </th>
+                                        <th>{{ trans('product.avaliabilty') }} </th>
+                                        <th>{{ trans('product.barcode') }} </th>
                                         <th>{{ trans('product.image') }}</th>
                                         <th>{{ trans('product.Action') }}</th>
                                     </tr>
@@ -49,9 +50,10 @@
                                         <th>{{ trans('product.id') }}</th>
                                         <th>{{ trans('product.product name') }}</th>
                                         <th>{{ trans('product.product description') }}</th>
-                                        <th> quantity </th>
-                                        <th> avaliabilty </th>
-                                        <th> barcode </th>
+                                        <th>{{ trans('product.quantity') }} </th>
+                                        <th>{{ trans('product.boxFilling') }} </th>
+                                        <th>{{ trans('product.avaliabilty') }} </th>
+                                        <th>{{ trans('product.barcode') }} </th>
                                         <th>{{ trans('product.image') }}</th>
                                         <th>{{ trans('product.Action') }}</th>
                                     </tr>
@@ -64,6 +66,7 @@
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->description }}</td>
                                             <td>{{ $item->quantity }}</td>
+                                            <td>{{ $item->boxFilling }}</td>
                                             <td>{{ $item->avaliabilty }}</td>
                                             <td>{{ $item->barCode }}</td>
                                             <td>

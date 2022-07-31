@@ -23,7 +23,10 @@ return[
 "barCode"=>"باركود",
 "quantity"=>"الكمية",
 "avaliability"=>"متوفر/غير متوفر",
-""=>"",
+"quantity"=>"الكمية",
+"avaliabilty"=>"توفر الكمية",
+"barcode"=>"باركود",
+"boxFilling"=>"تعبئة الصندوق"
 
 
 ];

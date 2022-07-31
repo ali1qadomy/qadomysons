@@ -11,7 +11,7 @@ class product extends Model
     use HasFactory;
     use HasTranslations;
     protected $translatable  = ['name', 'description'];
-    protected $fillable = ['name', 'description', 'subcategoryid', 'quantity', 'avaliabilty', 'barCode'];
+    protected $fillable = ['name', 'description', 'subcategoryid','boxFilling','quantity', 'avaliabilty', 'barCode'];
     public function subcategory()
     {
         return $this->belongsTo(subCategory::class, 'subcategoryid', 'id');
@@ -19,5 +19,9 @@ class product extends Model
     public function image()
     {
         return $this->morphMany(image::class, 'imageable');
+    }
+    public function invoice()
+    {
+        return $this->belongsToMany(invoice::class);
     }
 }

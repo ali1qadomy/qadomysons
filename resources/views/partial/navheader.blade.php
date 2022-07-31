@@ -49,42 +49,22 @@
                     <div class="dropdown-menu mailbox animated slideInUp">
                         <ul>
                             <li>
-                                <div class="drop-title">Notifications</div>
+                                <div class="drop-title">Notifications({{ auth::user()->unreadNotifications->count() }})
+                                </div>
                             </li>
                             <li>
                                 <div class="message-center">
                                     <!-- Message -->
-                                    <a href="#">
-                                        <div class="btn btn-danger btn-circle"><i class="fa fa-link"></i></div>
-                                        <div class="mail-contnet">
-                                            <h5>Luanch Admin</h5> <span class="mail-desc">Just see the my new
-                                                admin!</span> <span class="time">9:30 AM</span>
-                                        </div>
-                                    </a>
-                                    <!-- Message -->
-                                    <a href="#">
-                                        <div class="btn btn-success btn-circle"><i class="ti-calendar"></i></div>
-                                        <div class="mail-contnet">
-                                            <h5>Event today</h5> <span class="mail-desc">Just a reminder that you have
-                                                event</span> <span class="time">9:10 AM</span>
-                                        </div>
-                                    </a>
-                                    <!-- Message -->
-                                    <a href="#">
-                                        <div class="btn btn-info btn-circle"><i class="ti-settings"></i></div>
-                                        <div class="mail-contnet">
-                                            <h5>Settings</h5> <span class="mail-desc">You can customize this template as
-                                                you want</span> <span class="time">9:08 AM</span>
-                                        </div>
-                                    </a>
-                                    <!-- Message -->
-                                    <a href="#">
-                                        <div class="btn btn-primary btn-circle"><i class="ti-user"></i></div>
-                                        <div class="mail-contnet">
-                                            <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span>
-                                            <span class="time">9:02 AM</span>
-                                        </div>
-                                    </a>
+                                    @foreach (auth::user()->unreadNotifications as $notification)
+                                        <a href="{{ route('product.show',$notification->data['prod_id']) }}">
+                                            <div class="btn btn-danger btn-circle"><i class="fa fa-link"></i></div>
+                                            <div class="mail-contnet">
+                                                <h5>{{ $notification->user_created }}</h5>
+                                                <span class="mail-desc">{{ $notification->data['title'] }}</span>
+                                                <span class="time">{{ $notification->created_at }}</span>
+                                            </div>
+                                        </a>
+                                    @endforeach
                                 </div>
                             </li>
                             <li>
@@ -114,9 +94,8 @@
                                 <div class="message-center">
                                     <!-- Message -->
                                     <a href="#">
-                                        <div class="user-img"> <img
-                                                src="{{ asset('admin/assets/images/users/1.jpg') }}" alt="user"
-                                                class="img-circle"> <span
+                                        <div class="user-img"> <img src="{{ asset('admin/assets/images/users/1.jpg') }}"
+                                                alt="user" class="img-circle"> <span
                                                 class="profile-status online pull-right"></span> </div>
                                         <div class="mail-contnet">
                                             <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span>
@@ -125,9 +104,9 @@
                                     </a>
                                     <!-- Message -->
                                     <a href="#">
-                                        <div class="user-img"> <img
-                                                src="{{ asset('admin/assets/images/users/2.jpg') }}" alt="user"
-                                                class="img-circle"> <span class="profile-status busy pull-right"></span>
+                                        <div class="user-img"> <img src="{{ asset('admin/assets/images/users/2.jpg') }}"
+                                                alt="user" class="img-circle"> <span
+                                                class="profile-status busy pull-right"></span>
                                         </div>
                                         <div class="mail-contnet">
                                             <h5>Sonu Nigam</h5> <span class="mail-desc">I've sung a song! See you
@@ -138,8 +117,8 @@
                                     <a href="#">
                                         <div class="user-img"> <img
                                                 src="{{ asset('admin/assets/images/users/3.jpg') }}" alt="user"
-                                                class="img-circle"> <span
-                                                class="profile-status away pull-right"></span> </div>
+                                                class="img-circle"> <span class="profile-status away pull-right"></span>
+                                        </div>
                                         <div class="mail-contnet">
                                             <h5>Arijit Sinh</h5> <span class="mail-desc">I am a singer!</span> <span
                                                 class="time">9:08 AM</span>

@@ -13,6 +13,7 @@ return [
     "Logout"=>"Logout",
     "Home"=>"Home",
     "Email"=>"Email",
+    "invoice"=>"invoices",
     ""=>"",
     ""=>"",
     ""=>"",
@@ -23,7 +24,6 @@ return [
     ""=>"",
     ""=>"",
     ""=>"",
-    ""=>"",
-    
+
 ];
 ?>

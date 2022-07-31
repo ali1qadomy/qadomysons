@@ -13,19 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('custommers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
-            $table->unsignedBigInteger('subcategoryid');
-            $table->bigInteger('quantity');
-            $table->decimal('boxFilling');
-            $table->boolean('avaliabilty');
-            $table->string('barCode');
+            $table->string('phoneNumber');
+            $table->string('address');
+            $table->decimal('Total remaining on it')->nullable();
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('custommers');
     }
 };

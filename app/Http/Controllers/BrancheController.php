@@ -7,6 +7,7 @@ use App\Http\Requests\StorebrancheRequest;
 use App\Http\Requests\UpdatebrancheRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert as Alert;
 
 class BrancheController extends Controller
@@ -41,7 +42,7 @@ class BrancheController extends Controller
      */
     public function store(StorebrancheRequest $request)
     {
-        try {
+          try {
             $branche = new branche();
             $branche->create([
                 'name' => ['en' => $request->BrancheNameEn, 'ar' => $request->BrancheNameAr]

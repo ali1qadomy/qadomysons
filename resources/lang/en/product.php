@@ -23,6 +23,9 @@ return[
 "avaliability"=>"avaliability",
 "barCode"=>"barCode",
 "avaliability"=>"avaliability",
-""=>"",
+"quantity"=>"quantity",
+"avaliabilty"=>"avaliabilty",
+"barcode"=>"barcode",
+"boxFilling"=>"boxFilling"
 ];
 ?>

@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\category;
 use App\Http\Requests\StorecategoryRequest;
 use App\Http\Requests\UpdatecategoryRequest;
+use Illuminate\Http\Client\Request as ClientRequest;
+use Illuminate\Http\Client\Response;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert as Alert;
+
 
 class CategoryController extends Controller
 {
@@ -21,98 +24,118 @@ class CategoryController extends Controller
         return view('category.category', compact('cat'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function  getCategory()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StorecategoryRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StorecategoryRequest $request)
-    {
-        try {
-            $cat = new category();
-            $cat->create([
-                'name' => ['en' => $request->categoryNameEn, 'ar' => $request->categoryNameAr],
-                'description' => ['en' => $request->categoryDescEn, 'ar' => $request->categoryDescAr]
+        $category = category::all();
+        if ($category->count() > 0) {
+            return response()->json([
+                "data" => $category,
+                "message" => "all category",
+                "status" => true
             ]);
-            Alert::success('Success', 'Success Add');
-            return redirect()->back();
-        } catch (\Throwable $th) {
-            Alert::error('Failed', 'Failed Add');
-            return redirect()->back();
-        }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(category $category)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(category $category)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatecategoryRequest  $request
-     * @param  \App\Models\category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatecategoryRequest $request, category $category)
-    {
-        try {
-            $category = category::find($request->updatecategory);
-            $category->update([
-                'name' => ['en' => $request->ucategoryNameEn, 'ar' => $request->ucategoryNameAr],
-                'description' => ['en' => $request->ucategoryDescEn, 'ar' => $request->ucategoryDescAr]
+        } else {
+            return response()->json([
+                "message" => "no category",
+                "status" => false
             ]);
-            Alert::success('Success', 'Success Update');
-            return redirect()->back();
-        } catch (\Throwable $th) {
-            Alert::error('Failed', 'Failed Update');
-            return redirect()->back();
         }
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(category $category, Request $request)
+    public function  addCategory(Request $request)
     {
-        try {
-            $category = category::find($request->deletecategory)->delete();
-            Alert::success('Success', 'Success Delete');
-            return redirect()->back();
-        } catch (\Throwable $th) {
-            Alert::error('Failed', 'Failed Delete');
-            return redirect()->back();
+        $category = new category();
+        $category->create([
+            'name' => ['en' => $request->categoryName, 'ar' => $request->categoryNamear],
+            'description' => $request->categorydesc
+        ]);
+        return response()->json([
+            'message' => "success to add new category",
+            'status' => true
+        ]);
+    }
+    public function updateCategory(Request $request)
+    {
+        $category = category::where('id', $request->id)->first();
+        $category->update([
+            'name' => $request->categoryName,
+            'description' => $request->categoryDesc
+        ]);
+        if ($category->count() > 0) {
+            return Response()->json([
+                'message' => "succsfull update",
+                'status' => true
+            ]);
+        } else {
+            return Response()->json([
+                'message' => "something is wrong",
+                'status' => false
+            ]);
         }
+    }
+    public function deleteCategory(Request $request)
+    {
+        $category = category::where('id', $request->id)->delete();
+        if ($category->count() > 0) {
+            return Response()->json([
+                'message' => "success delete",
+                'status' => true
+            ]);
+        } else {
+            return Response()->json([
+                'message' => "unsuccess delete",
+                'status' => false
+            ]);
+        }
+    }
+    public function readtable()
+    {
+        $category = category::all();
+        return response()->json([
+            'category' => $category
+        ]);
+    }
+    public function  addCategories(Request $request)
+    {
+        $category = new category();
+        $category->create([
+            'name' => ['en' => $request->categorynameen, 'ar' => $request->categorynamear],
+            'description' => ['en' => $request->categorydescen, 'ar' => $request->categorydescar]
+        ]);
+        Alert::success('Success', 'Success Add');
+        return response()->json([
+            'message' => '',
+            'status' => true
+        ]);
+    }
+    public function updateCategories($id)
+    {
+        $cat = category::where('id', $id)->get();
+        if ($cat) {
+            return response()->json([
+                'status' => "200",
+                "category" => $cat
+            ]);
+        }
+    }
+    public function editupdatecategory(Request $request, $id)
+    {
+        $cat = category::where('id', $id)->update([
+            'name' => ['en' => $request->categorynameen, 'ar' => $request->categorynamear],
+            'description' => ['en' => $request->categorydescen, 'ar' => $request->categorydescar],
+            'updated_at' => now()
+        ]);
+        return response()->json([
+            'message' => 'updated',
+            'status' => true
+        ]);
+    }
+    public function deletecategorymodel($id)
+    {
+        $category = category::where('id', $id)->delete();
+        return response()->json([
+            'status' => true,
+            'message' => "deleted",
+            'category' => $category
+
+        ]);
     }
 }

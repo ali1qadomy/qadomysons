@@ -1,4 +1,5 @@
  <!-- All Jquery -->
+
  <!-- ============================================================== -->
  <script src="{{ asset('admin/assets/plugins/jquery/jquery.min.js') }}"></script>
  <!-- Bootstrap tether Core JavaScript -->
@@ -28,6 +29,9 @@
  <!-- This is data table -->
  <script src="{{ asset('admin/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
  <!-- start - This is for export functionality only -->
+
+
+ <!-- -->
  <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
  <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
@@ -35,6 +39,8 @@
  <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
  <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
  <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
  <!-- end - This is for export functionality only -->
  <script>
      $(document).ready(function() {
@@ -51,7 +57,7 @@
                  "order": [
                      [2, 'asc']
                  ],
-               
+
                  "displayLength": 25,
                  "drawCallback": function(settings) {
                      var api = this.api();
@@ -70,7 +76,7 @@
                          }
                      });
                  },
-       
+
              });
              // Order by the grouping
              $('#example tbody').on('click', 'tr.group', function() {
@@ -88,7 +94,7 @@
          buttons: [
              'copy', 'csv', 'excel', 'pdf', 'print'
          ],
-       
+
 
 
      });

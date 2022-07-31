@@ -7,7 +7,10 @@ use App\Http\Requests\StoreproductRequest;
 use App\Http\Requests\UpdateproductRequest;
 use App\Models\image as ModelsImage;
 use App\Models\subCategory;
+use App\Models\User;
+use App\Notifications\createProudct;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
@@ -52,12 +55,14 @@ class ProductController extends Controller
     public function store(StoreproductRequest $request)
     {
         try {
+
             $newProduct = [
                 'name' => collect(['en' => $request->productnameEn, 'ar' => $request->productnameAr])->toJson(),
                 'subcategoryid' => $request->ProdSubCategory,
                 'description' => collect(['en' => $request->productdescEn, 'ar' => $request->productdescAr])->toJson(),
                 'quantity' => $request->quantity,
-                'avaliabity' => $request->avaliable,
+                'boxFilling'=>$request->box_filling,
+                'avaliabilty' => $request->avaliable,
                 'barCode' => $request->barcode,
                 'created_at' => now(),
             ];
@@ -80,6 +85,10 @@ class ProductController extends Controller
                 }
             }
 
+            $user=User::where('id','!=',auth()->user()->id)->get();
+            $user_created=auth()->user()->id;
+            Notification::send($user,new createProudct($prod_id,$user_created,$newProduct['name']));
+
             Alert::success('Success', 'Success Added new Product');
             return redirect()->route('product.index');
         } catch (\Exception $th) {
@@ -94,9 +103,12 @@ class ProductController extends Controller
      * @param  \App\Models\product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(product $product)
+    public function show($id)
     {
-        //
+        $product=product::findorFail($id);
+        $getId=DB::table('notifications')->where('data->prod_id',$id)->pluck('id');
+        DB::table('notifications')->where('data->prod_id',$id)->update(['read_at'=>now()]);
+        return $product;
     }
 
     /**

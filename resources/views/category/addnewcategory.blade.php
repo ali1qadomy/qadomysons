@@ -8,34 +8,33 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{ route('category.store') }}">
-                @csrf
+
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="exampleInputPassword1">{{ trans('category.category Name English') }}:</label>
-                        <input type="text" class="form-control" name="categoryNameEn" required>
+                        <input type="text" class="nameEn form-control" name="categoryNameEn" required>
                     </div>
                     <div class="form-group">
                         <label
                             for="exampleInputPassword1">{{ trans('category.category description English') }}:</label>
-                        <input type="text" class="form-control" name="categoryDescEn" required>
+                        <input type="text" class="descEn form-control" name="categoryDescEn" required>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">{{ trans('category.category Name Arabic') }}:</label>
-                        <input type="text" class="form-control" name="categoryNameAr" required>
+                        <input type="text" class="nameAr form-control" name="categoryNameAr" required>
                     </div>
                     <div class="form-group">
                         <label
                             for="exampleInputPassword1">{{ trans('category.category description Arabic') }}:</label>
-                        <input type="text" class="form-control" name="categoryDescAr" required>
+                        <input type="text" class="descAr form-control" name="categoryDescAr" required>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"
                         data-dismiss="modal">{{ trans('category.Close') }}</button>
-                    <button type="submit" class="btn btn-primary">{{ trans('category.Add Category') }}</button>
+                    <button type="submit" class="btn btn-primary savecategory">{{ trans('category.Add Category') }}</button>
                 </div>
-            </form>
+
         </div>
     </div>
 </div>

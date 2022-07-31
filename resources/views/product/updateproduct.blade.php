@@ -35,6 +35,10 @@
                             value="{{ $item->description }}" required>
                     </div>
                     <div class="form-group">
+                        <label for="exampleInputPassword1">{{ trans('product.box filling') }}:</label>
+                        <input type="text" class="form-control" name="box_filling" required>
+                    </div>
+                    <div class="form-group">
                         <label for="Subcategory">{{ trans('product.Sub_Category Name') }}:</label>
                         <select class="form-control" name="uProdSubCategory" value="{{ $item->category_id }}"
                             required>
