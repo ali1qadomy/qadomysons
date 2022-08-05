@@ -7,6 +7,7 @@ use App\Http\Requests\StoreinvoiceRequest;
 use App\Http\Requests\UpdateinvoiceRequest;
 use App\Models\custommer;
 use App\Models\product;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -23,10 +24,11 @@ class InvoiceController extends Controller
     {
 
         $product = product::all();
+        $person=User::all();
 
 
         // $product = product::all();
-        return view('invoices.newInvoice', compact('product'));
+        return view('invoices.newInvoice', compact('product','person'));
         //  return $product->toArray() ;
     }
 
@@ -59,7 +61,7 @@ class InvoiceController extends Controller
             $invoice = new invoice();
             $invoice = [
                 'custommer_id' => $cust_id,
-                'salesperson' => $request->salesPerson,
+                'salesperson' => $request->salesperson,
                 'created_at' => now()
             ];
             $invoice_id = DB::table('invoices')->insertGetId($invoice);
@@ -69,8 +71,10 @@ class InvoiceController extends Controller
                     $invoices->products()->attach($request->product[$key], [
                         'quantity' => $request->units[$key],
                         'price' => $request->price[$key],
+                        'discount' => $request->Discount[$key],
                         'totalPrice' => $request->total[$key],
-                        'totalInvoice' => $request->totalinvoice[$key]
+                        'totalInvoice' => $request->totalinvoice,
+                        'created_at'=>now()
                     ]);
                 }
             }
@@ -88,7 +92,7 @@ class InvoiceController extends Controller
             $invoice = invoice::find($request->idinvoice);
             $invoice->update([
                 'custommer_id' => $customer->id,
-                'salesperson' => $request->salesPerson,
+                'salesperson' => $request->salesperson,
                 'created_at' => now()
             ]);
             $invoices = invoice::where('id', $invoice->id)->with('products', function ($q) {
@@ -103,8 +107,9 @@ class InvoiceController extends Controller
                     $invoices->products()->attach($request->product[$key], [
                         'quantity' => $request->units[$key],
                         'price' => $request->price[$key],
+                        'discount'=>$request->Discount[$key],
                         'totalPrice' => $request->total[$key],
-                        'totalInvoice' => $request->totalinvoice[$key]
+                        'totalInvoice' => $request->totalinvoice,
                     ]);
                 }
             }
@@ -122,7 +127,6 @@ class InvoiceController extends Controller
             }
             $invoice->delete();
             $customer->delete();
-
             Alert::success('Success', 'Success Added new Product');
             return redirect()->route('invoice.index');
         }
@@ -132,7 +136,9 @@ class InvoiceController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\invoice  $invoice
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Respo
+     *
+
      */
     public function show(invoice $invoice)
     {
@@ -177,9 +183,11 @@ class InvoiceController extends Controller
             ->leftJoin('invoices', 'invoice_product.invoice_id', '=', "invoices.id")
             ->leftjoin('custommers', 'invoices.custommer_id', '=', 'custommers.id')
             ->leftjoin('products', 'invoice_product.product_id', '=', 'products.id')->get();*/
-        $invoice = invoice::where('id', $id)->with('products', function ($q) {
-            $q->select('*')->get();
-        }, 'custommer')->get();
+        $invoice = invoice::where('id', $id)->with(['products' => function ($q) {
+            $q->select();
+        }, 'custommer' => function ($q) {
+            $q->select();
+        }])->get();
 
         //$invoice = invoice::where('id',5)->with('custommers')->get();
 

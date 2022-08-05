@@ -13,17 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('invoice_product', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->string('customerName');
+            $table->decimal('paymentAmount');
             $table->unsignedBigInteger('invoice_id');
             $table->foreign('invoice_id')->references('id')->on('invoices');
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->integer('quantity')->nullable();
-            $table->decimal('price')->nullable();
-            $table->decimal('discount');
-            $table->decimal('totalPrice')->nullable();
-            $table->decimal('totalInvoice')->nullable();
+            $table->enum('paymentMethod', ['cash', 'check', 'visa']);
+            $table->string('note');
             $table->timestamps();
         });
     }
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoice_product');
+        Schema::dropIfExists('payments');
     }
 };

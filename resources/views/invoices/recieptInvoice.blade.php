@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-md-12 ">
                 <div class="card table brache">
-                    <form action="{{ route('invoice.store') }}" method="POST">
+                    <form action="{{ route('payment.store') }}" method="POST">
                         @csrf
                         <div class="card-header header">
                             <div class="col">
@@ -47,30 +47,41 @@
                             <div class="row">
                                 <div class="col">
                                     <label>{{ trans('invoice.customer name') }}</label>
-                                    <input type="text" class="form-control" id="cusname" name="Cname">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label>{{ trans('invoice.phone number') }}</label>
-                                    <input type="text" class="form-control" id="phnum"name="phone">
-                                </div>
-                                <div class="col">
-                                    <label>{{ trans('invoice.address') }}</label>
-                                    <input type="text" class="form-control" id="addr" name="address">
-                                </div>
-                                <div class="col">
-                                    <label>{{ trans('invoice.sales man') }}</label>
-                                    <select class="form-control" name="salesperson" id="person">
-                                        <option selected> choose person sales</option>
-                                        @foreach ($person as $p)
-                                            <option value="{{ $p->id }}">{{ $p-name}}</option>
+                                    <select class="js-example-basic-single form-control" id="cusname" name="Cname">
+                                        <option selected>choose customer name</option>
+                                        @foreach ($customer as $c)
+                                            <option value="{{ $c->id }}">{{ $c->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <label>{{ trans('invoice.phone number') }}</label>
+                                    <input type="text" class="form-control" id="phnum"name="phone">
+                                </div>
+                                <div class="col-3">
+                                    <label>{{ trans('invoice.address') }}</label>
+                                    <input type="text" class="form-control" id="addr" name="address">
+                                </div>
+                                <div class="col-3">
+                                    <label></label>
+                                    <select class="form-control" name="invoice_id" id="person">
+                                        <option selected> choose person sales</option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label></label>
+                                    <select class="form-control" name="paymentMethod" id="person">
+                                        <option selected>{{ trans('invoice.paymentMethod') }}</option>
+                                        <option value="cash">cash</option>
+                                        <option value="check">check</option>
+                                        <option value="visa">visa</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <hr/>
+                        <hr />
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="invoicetable"
@@ -78,19 +89,17 @@
                                     width="100%">
                                     <thead>
                                         <tr>
-                                            <th>{{ trans('invoice.product') }}</th>
-                                            <th>{{ trans('invoice.units') }}</th>
                                             <th>{{ trans('invoice.price') }}</th>
                                             <th>{{ trans('invoice.Discount') }}</th>
+                                            <th>{{ trans('invoice.paymentMethod') }}</th>
                                             <th>{{ trans('invoice.total price') }}</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>{{ trans('invoice.product') }}</th>
-                                            <th>{{ trans('invoice.units') }}</th>
                                             <th>{{ trans('invoice.price') }}</th>
                                             <th>{{ trans('invoice.Discount') }}</th>
+                                            <th>{{ trans('invoice.paymentMethod') }}</th>
                                             <th>{{ trans('invoice.total price') }}</th>
                                             <th><input type="text" name="totalinvoice" class="form-control"
                                                     id="alltotal"></th>
@@ -100,41 +109,51 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <input type="hidden" id="invoiceid" name="idinvoice">
-                            <input type="hidden" id="customerid" name="idcustomer">
-                            <button type="submit" name="action" value="insert"
+                            <button type="submit" value="insert"
                                 class="btn btn-primary">{{ trans('invoice.save') }}</button>
                             <button type="button" id="newinvoice" onclick="newinv();" class="btn btn-success">new
                                 ivoice</button>
-                            <button type="submit" name="action" id="updateinvoice" value="update"
-                                class="btn btn-warning">Update
-                                ivoice</button>
-                            <button type="submit" id="deleteinvoice" name="action" value="delete"
-                                class="btn btn-danger">Deleteivoice</button>
                     </form>
                 </div>
                 <button class="btn btn-primary" name="addRow" id="addRow">{{ trans('invoice.AddRow') }}</button>
             </div>
         </div>
     </div>
-
 @endsection
 @section('userscript')
     <script>
         $(document).ready(function() {
             var numberid;
-            getivoice();
+            $('.js-example-basic-single').select2();
+            /*ajax get lastinvoice id*/
+
+            $('#alltotal').val(0);
+            /* append one row when open page*/
+            var html = '<tr>';
+            html +=
+                '  <td><input name="price[]" type="number" step="0.0000001" value = 0 class="form-control price"></td>';
+            html +=
+                '  <td><input name="Discount[]" type="number" step="0.0000001" value = 0 class="form-control price"></td>';
+                html +=
+                '  <td><select class="form-control" name="paymentMethod" id="person"> <option selected > payment Method </option><option value = "Cash" > cash </option> <option value = "Check" > check </option> <option value = "Visa" > visa </option> </select></td>';
+            html +=
+                '  <td><input name="total[]" type="number" step="0.0000001" value = 0 class="form-control price all" readonly></td>';
+
+            html += '  <td></td>';
+            html += '</tr>';
+            $('#invoicetable tbody').append(html);
+            /* end append one row when open page*/
+
             /*end ajax loader*/
+
             $('#addRow').click(function() {
                 var html = '<tr>';
-                html +=
-                    '<td><select class="js-example-basic-single form-control" name="product[]" class="form-control"><option selected > {{ trans('invoice.type product name') }} </option>@foreach($product as $item)<option value = "{{ $item->id }}" >{{ $item->name }} </option>@endforeach </select></td> ';
-                html +=
-                    '  <td><input name="units[]" type="number" step="0.0000001" value = "" class="form-control price"></td>';
                 html +=
                     '  <td><input name="price[]" type="number" step="0.0000001" value = 0 class="form-control price"></td>';
                 html +=
                     '  <td><input name="Discount[]" type="number" step="0.0000001" value = 0 class="form-control price"></td>';
+                    html +=
+                '  <td><select class="form-control" name="paymentMethod" id="person"> <option selected > payment Method </option><option value = "Cash" > cash </option> <option value = "Check" > check </option> <option value = "Visa" > visa </option> </select></td>';
                 html +=
                     '  <td><input name="total[]" type="number" step="0.0000001" value = 0 class="form-control price all" readonly></td>';
                 html += '  <td></td>';
@@ -144,15 +163,15 @@
                     var grandTotal = 0;
                     var sum = 0;
                     $("input[name='price[]']").each(function(index) {
-                        var qty = $("input[name='units[]'] ").eq(index).val();
                         var price = $("input[name='price[]'] ").eq(index).val();
                         var Dis = $("input[name='Discount[]'] ").eq(index).val();
-                        var output = (parseFloat(qty) * parseFloat(price)) - Dis;
+                        var output = parseFloat(price) - parseFloat(Dis);
                         sum += output;
                         if (!isNaN(output)) {
                             $("input[name='total[]']").eq(index).val(output);
-                            $("#alltotal").val(sum);
+
                         }
+                        $("#alltotal").val(sum);
                     });
                 });
             });
@@ -160,10 +179,9 @@
                 var grandTotal = 0;
                 var sum = 0.0;
                 $("input[name='price[]']").each(function(index) {
-                    var qty = $("input[name='units[]'] ").eq(index).val();
                     var price = $("input[name='price[]'] ").eq(index).val();
                     var Dis = $("input[name='Discount[]'] ").eq(index).val();
-                    var output = (parseFloat(qty) * parseFloat(price)) - Dis;
+                    var output = parseFloat(price) - parseFloat(Dis);
                     sum += output;
                     if (!isNaN(output)) {
                         $("input[name='total[]']").eq(index).val(output);
@@ -172,35 +190,41 @@
                     $("#alltotal").val(sum);
                 });
             });
-        });
+            $('#cusname').on('change', function() {
 
-        function getivoice() {
-            $('#alltotal').val(0);
-            $('#num').change(function() {
-                var num = $('#num').val();
+                var id = $(this).val();
                 $.ajax({
-                    url: "invoiceget/" + num,
+                    url: "cutsomDetails/" + id,
                     method: "get",
-                    datatype: 'json',
+                    dataType: "json",
                     data: {
-                        num: num,
+                        id: id
                     },
                     success: function(response) {
-                        $('.tbodyy').html("");
-                        $.each(response.invoice, function(key, item) {
 
-                            $.each(item.products, function(key, pro) {
-console.log(pro.id);
-                                $('#alltotal').val(pro.totalInvoice);
-
-                            });
-                            $('.tbodyy').append(row);
-
-                        });
+                        $('#phnum').val(response.customer.phoneNumber);
+                        $('#addr').val(response.customer.address);
                     }
-
                 });
             });
-        }
+            $('#cusname').on('change', function() {
+                var id = $(this).val();
+                $.ajax({
+                    url: "getinvoices/" + id,
+                    method: "get",
+                    dataType: "json",
+                    data: {
+                        id: id
+                    },
+                    success: function(response) {
+                        for (var i = 0; i < response.invoice.length; i++) {
+                            $('#person').append("<option value=" + response.invoice[i].id +
+                                ">" + response.invoice[i].id + "</option>");
+                        }
+                    }
+                });
+            });
+
+        });
     </script>
 @endsection

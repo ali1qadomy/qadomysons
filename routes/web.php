@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrancheController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\SubCategoryController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\testController;
 use App\Mail\Test;
 use App\Mail\testMail;
 use App\Models\category;
+use App\Models\Payment;
 use App\Models\Role;
 use App\Models\subCategory;
 use Illuminate\Routing\Route as RoutingRoute;
@@ -67,8 +69,9 @@ Route::group(
             /*route ajax ivoice */
             Route::get('invoiceget/{id}', [InvoiceController::class, 'invoiceget']);
             Route::get('getlastinvoice', [InvoiceController::class, 'getlastinvoice']);
-
-
+            Route::resource('payment', PaymentController::class);
+            Route::get('cutsomDetails/{id}',[PaymentController::class,"cutsomDetails"] );
+            Route::get('getinvoices/{id}',[PaymentController::class,"getinvoices"] );
             /**send email */
             route::get('/send', function () {
                 Mail::to('aliqadomy96@gmail.com')
