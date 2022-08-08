@@ -7,6 +7,8 @@ use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
 use App\Models\custommer;
 use App\Models\invoice;
+use Exception;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PaymentController extends Controller
 {
@@ -39,7 +41,24 @@ class PaymentController extends Controller
      */
     public function store(StorePaymentRequest $request)
     {
-        return $request;
+       try {
+        foreach ($request->price as $key => $value) {
+            if ($value != "") {
+                $payment = new Payment();
+                $payment->customerName = $request->Cname;
+                $payment->paymentAmount = $request->price[$key];
+                $payment->Discount = $request->Discount[$key];
+                $payment->invoice_id = $request->invoiceId;
+                $payment->paymentMethod = $request->paymentMethod[$key];
+                $payment->save();
+            }
+        }
+        Alert::success("Success reciption invoice","Done");
+        return redirect()->back();
+       } catch (\Throwable $th) {
+        Alert::error("Failed reciption invoice","Failed");
+        return redirect()->back();
+       }
     }
 
     /**

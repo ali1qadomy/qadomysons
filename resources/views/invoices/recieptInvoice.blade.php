@@ -31,14 +31,13 @@
                         <div class="card-header header">
                             <div class="col">
                                 <h4 class="sons">QadomySons</h4>
-                                <h4 class="card-title">{{ trans('invoice.invoice') }}</h4>
+                                <h4 class="card-title">{{ trans('invoice.Catch Receipt') }}</h4>
                             </div>
                             <div class="row">
                                 <div class="col-10"></div>
                                 <div class="col-2">
                                     <label for="num">invoice num :</label>
-                                    <input type="number" id="num" class="form-control" min="1"
-                                        onclick="getivoice();">
+                                    <input type="number" id="num" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -56,29 +55,21 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-3">
+                                <div class="col-4">
                                     <label>{{ trans('invoice.phone number') }}</label>
                                     <input type="text" class="form-control" id="phnum"name="phone">
                                 </div>
-                                <div class="col-3">
+                                <div class="col-4">
                                     <label>{{ trans('invoice.address') }}</label>
                                     <input type="text" class="form-control" id="addr" name="address">
                                 </div>
-                                <div class="col-3">
+                                <div class="col-4">
                                     <label></label>
-                                    <select class="form-control" name="invoice_id" id="person">
-                                        <option selected> choose person sales</option>
+                                    <select class="form-control" name="invoiceId" id="person">
+                                        <option selected>choose invoice</option>
                                     </select>
                                 </div>
-                                <div class="col-3">
-                                    <label></label>
-                                    <select class="form-control" name="paymentMethod" id="person">
-                                        <option selected>{{ trans('invoice.paymentMethod') }}</option>
-                                        <option value="cash">cash</option>
-                                        <option value="check">check</option>
-                                        <option value="visa">visa</option>
-                                    </select>
-                                </div>
+
                             </div>
                         </div>
                         <hr />
@@ -111,8 +102,7 @@
                             </div>
                             <button type="submit" value="insert"
                                 class="btn btn-primary">{{ trans('invoice.save') }}</button>
-                            <button type="button" id="newinvoice" onclick="newinv();" class="btn btn-success">new
-                                ivoice</button>
+                            <button type="button" id="newinvoice" class="btn btn-success">new invoice</button>
                     </form>
                 </div>
                 <button class="btn btn-primary" name="addRow" id="addRow">{{ trans('invoice.AddRow') }}</button>
@@ -134,8 +124,8 @@
                 '  <td><input name="price[]" type="number" step="0.0000001" value = 0 class="form-control price"></td>';
             html +=
                 '  <td><input name="Discount[]" type="number" step="0.0000001" value = 0 class="form-control price"></td>';
-                html +=
-                '  <td><select class="form-control" name="paymentMethod" id="person"> <option selected > payment Method </option><option value = "Cash" > cash </option> <option value = "Check" > check </option> <option value = "Visa" > visa </option> </select></td>';
+            html +=
+                '  <td><select class="form-control" name="paymentMethod[]" id="person"> <option selected > payment Method </option><option value = "Cash" > cash </option> <option value = "Check" > check </option> <option value = "Visa" > visa </option> </select></td>';
             html +=
                 '  <td><input name="total[]" type="number" step="0.0000001" value = 0 class="form-control price all" readonly></td>';
 
@@ -152,8 +142,8 @@
                     '  <td><input name="price[]" type="number" step="0.0000001" value = 0 class="form-control price"></td>';
                 html +=
                     '  <td><input name="Discount[]" type="number" step="0.0000001" value = 0 class="form-control price"></td>';
-                    html +=
-                '  <td><select class="form-control" name="paymentMethod" id="person"> <option selected > payment Method </option><option value = "Cash" > cash </option> <option value = "Check" > check </option> <option value = "Visa" > visa </option> </select></td>';
+                html +=
+                    '  <td><select class="form-control" name="paymentMethod[]" id="person"> <option selected > payment Method </option><option value = "Cash" > cash </option> <option value = "Check" > check </option> <option value = "Visa" > visa </option> </select></td>';
                 html +=
                     '  <td><input name="total[]" type="number" step="0.0000001" value = 0 class="form-control price all" readonly></td>';
                 html += '  <td></td>';

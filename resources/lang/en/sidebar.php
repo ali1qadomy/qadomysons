@@ -14,7 +14,7 @@ return [
     "Home"=>"Home",
     "Email"=>"Email",
     "invoice"=>"invoices",
-    ""=>"",
+    "Catch Receipt"=>"Catch Receipt",
     ""=>"",
     ""=>"",
     ""=>"",

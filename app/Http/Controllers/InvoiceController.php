@@ -24,11 +24,11 @@ class InvoiceController extends Controller
     {
 
         $product = product::all();
-        $person=User::all();
+        $person = User::all();
 
 
         // $product = product::all();
-        return view('invoices.newInvoice', compact('product','person'));
+        return view('invoices.newInvoice', compact('product', 'person'));
         //  return $product->toArray() ;
     }
 
@@ -48,7 +48,6 @@ class InvoiceController extends Controller
      */
     public function store(StoreinvoiceRequest $request)
     {
-
         if ($request->action == "insert") {
             $customre = new custommer();
             $customre = ([
@@ -74,7 +73,7 @@ class InvoiceController extends Controller
                         'discount' => $request->Discount[$key],
                         'totalPrice' => $request->total[$key],
                         'totalInvoice' => $request->totalinvoice,
-                        'created_at'=>now()
+                        'created_at' => now()
                     ]);
                 }
             }
@@ -107,7 +106,7 @@ class InvoiceController extends Controller
                     $invoices->products()->attach($request->product[$key], [
                         'quantity' => $request->units[$key],
                         'price' => $request->price[$key],
-                        'discount'=>$request->Discount[$key],
+                        'discount' => $request->Discount[$key],
                         'totalPrice' => $request->total[$key],
                         'totalInvoice' => $request->totalinvoice,
                     ]);
@@ -188,10 +187,7 @@ class InvoiceController extends Controller
         }, 'custommer' => function ($q) {
             $q->select();
         }])->get();
-
         //$invoice = invoice::where('id',5)->with('custommers')->get();
-
-
         return response()->json([
             'invoice' => $invoice,
             'status' => true,
@@ -201,6 +197,7 @@ class InvoiceController extends Controller
     public function getlastinvoice()
     {
         $lastId = invoice::select('id')->orderby('id', 'desc')->limit(1)->get();
+
         return response()->json([
             'lastid' => $lastId,
             'status' => true

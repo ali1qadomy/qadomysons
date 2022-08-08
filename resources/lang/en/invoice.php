@@ -18,7 +18,7 @@ return[
     "recipt"=>"receipt voucher",
     "paymentMethod"=>"payment Method",
     "# of invoice"=>"# of invoice",
-    ""=>"",
+    "Catch Receipt"=>"Catch Receipt",
     ""=>"",
     ""=>"",
     ""=>"",

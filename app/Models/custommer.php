@@ -14,4 +14,7 @@ class custommer extends Model
     {
         return $this->hasMany(invoice::class,  'custommer_id','id'); //,'custommer_id','id'
     }
+    public function payment(){
+        return $this->hasMany(invoice::class);
+    }
 }

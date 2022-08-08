@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('customerName');
             $table->decimal('paymentAmount');
+            $table->decimal('Discount');
             $table->unsignedBigInteger('invoice_id');
             $table->foreign('invoice_id')->references('id')->on('invoices');
             $table->enum('paymentMethod', ['cash', 'check', 'visa']);

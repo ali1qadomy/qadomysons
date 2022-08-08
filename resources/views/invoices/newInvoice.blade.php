@@ -64,7 +64,7 @@
                                     <select class="form-control" name="salesperson" id="person">
                                         <option selected> choose person sales</option>
                                         @foreach ($person as $p)
-                                            <option value="{{ $p->id }}">{{ $p-name}}</option>
+                                            <option value="{{ $p->id }}">{{ $p->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -120,45 +120,82 @@
 
 @endsection
 @section('userscript')
-    <script>
-        $(document).ready(function() {
-            var numberid;
-            getivoice();
-            /*end ajax loader*/
-            $('#addRow').click(function() {
-                var html = '<tr>';
-                html +=
-                    '<td><select class="js-example-basic-single form-control" name="product[]" class="form-control"><option selected > {{ trans('invoice.type product name') }} </option>@foreach($product as $item)<option value = "{{ $item->id }}" >{{ $item->name }} </option>@endforeach </select></td> ';
-                html +=
-                    '  <td><input name="units[]" type="number" step="0.0000001" value = "" class="form-control price"></td>';
-                html +=
-                    '  <td><input name="price[]" type="number" step="0.0000001" value = 0 class="form-control price"></td>';
-                html +=
-                    '  <td><input name="Discount[]" type="number" step="0.0000001" value = 0 class="form-control price"></td>';
-                html +=
-                    '  <td><input name="total[]" type="number" step="0.0000001" value = 0 class="form-control price all" readonly></td>';
-                html += '  <td></td>';
-                html += '</tr>';
-                $('#invoicetable tbody').append(html);
-                $(".price").keydown(function(e) {
-                    var grandTotal = 0;
-                    var sum = 0;
-                    $("input[name='price[]']").each(function(index) {
-                        var qty = $("input[name='units[]'] ").eq(index).val();
-                        var price = $("input[name='price[]'] ").eq(index).val();
-                        var Dis = $("input[name='Discount[]'] ").eq(index).val();
-                        var output = (parseFloat(qty) * parseFloat(price)) - Dis;
-                        sum += output;
-                        if (!isNaN(output)) {
-                            $("input[name='total[]']").eq(index).val(output);
-                            $("#alltotal").val(sum);
-                        }
-                    });
+<script>
+    $(document).ready(function() {
+        var numberid;
+        getivoice();
+        newinv();
+        /*ajax loader*/
+        $.ajax({
+            url: "getlastinvoice",
+            type: "get",
+            async: false,
+            datatype: 'json',
+            success: function(response) {
+                $.each(response.lastid, function(key, item) {
+                    $('#num').val(item.id);
+                    $('#invoiceid').val(item.id);
+                    numberid = item.id;
                 });
-            });
+            }
+        });
+        $.ajax({
+            url: "invoiceget/" + numberid,
+            method: "get",
+            datatype: 'JSON',
+            async: false,
+            data: {
+                numberid: numberid,
+            },
+            success: function(response) {
+                $('.tbodyy').html("");
+                       $.each(response.invoice, function(key,item) {
+
+                    $('#customerid').val(item.custommer_id);
+                    $('#cusname').val(item.custommer_id);
+                    var row = '<tr>';
+                        $.each(item.products,function(key,pro){
+                            row+='<td>\<select class="js-example-basic-single form-control" name="product[]"><option value="' + pro.
+                                product_id+ '">' + pro.name.{{ App::getlocale() }} + '</option></select></td>';
+                                row+='<td><input name="units[]" type="number" value="' + pro.quantity+ '" class="form-control price"></td>';
+                                row+='<td><input name="price[]" type="number" step="0.0000001" value="' + pro.price + '" class="form-control price"></td>';
+                            row+='<td><input name="Discount[]" type="number" step="0.0000001" value="' + pro.discount + '" class="form-control price"></td>';
+                            row+=' <td><input name="total[]" type="number" step="0.0000001" value="' + pro.totalPrice + '" class="form-control price all"readonly></td>';
+                            row+=' <td></td>'
+                            row+='</tr>';
+                            });
+                        $('.tbodyy').append(row);
+                        });
+
+                    $.each(response.invoice, function(key, item) {
+                        $.each(item.products, function(key, pro) {
+
+                            $('#alltotal').val(pro.totalInvoice);
+                        });
+
+                    });
+            }
+        });
+        /*end ajax loader*/
+        $('.js-example-basic-single').select2();
+        $('#addRow').click(function() {
+            var html = '<tr>';
+            html +=
+                '<td><select class="js-example-basic-single form-control" name="product[]" class="form-control"><option selected > {{ trans('invoice.type product name') }} </option>@foreach($product as $item)<option value = "{{ $item->id }}" >{{ $item->name }} </option>@endforeach </select></td> ';
+            html +=
+                '  <td><input name="units[]" type="number" step="0.0000001" value = "" class="form-control price"></td>';
+            html +=
+                '  <td><input name="price[]" type="number" step="0.0000001" value = 0 class="form-control price"></td>';
+            html +=
+                '  <td><input name="Discount[]" type="number" step="0.0000001" value = 0 class="form-control price"></td>';
+            html +=
+                '  <td><input name="total[]" type="number" step="0.0000001" value = 0 class="form-control price all" readonly></td>';
+            html += '  <td></td>';
+            html += '</tr>';
+            $('#invoicetable tbody').append(html);
             $(".price").keydown(function(e) {
                 var grandTotal = 0;
-                var sum = 0.0;
+                var sum = 0;
                 $("input[name='price[]']").each(function(index) {
                     var qty = $("input[name='units[]'] ").eq(index).val();
                     var price = $("input[name='price[]'] ").eq(index).val();
@@ -167,40 +204,102 @@
                     sum += output;
                     if (!isNaN(output)) {
                         $("input[name='total[]']").eq(index).val(output);
-
+                        $("#alltotal").val(sum);
                     }
-                    $("#alltotal").val(sum);
                 });
             });
         });
-
-        function getivoice() {
-            $('#alltotal').val(0);
-            $('#num').change(function() {
-                var num = $('#num').val();
-                $.ajax({
-                    url: "invoiceget/" + num,
-                    method: "get",
-                    datatype: 'json',
-                    data: {
-                        num: num,
-                    },
-                    success: function(response) {
-                        $('.tbodyy').html("");
-                        $.each(response.invoice, function(key, item) {
-
-                            $.each(item.products, function(key, pro) {
-console.log(pro.id);
-                                $('#alltotal').val(pro.totalInvoice);
-
-                            });
-                            $('.tbodyy').append(row);
-
-                        });
+        $(".price").keydown(function(e) {
+            var grandTotal = 0;
+            var sum = 0;
+            var sum = 0.0;
+            $("input[name='price[]']").each(function(index) {
+                var qty = $("input[name='units[]'] ").eq(index).val();
+                var price = $("input[name='price[]'] ").eq(index).val();
+                var Dis = $("input[name='Discount[]'] ").eq(index).val();
+                var output = (parseFloat(qty) * parseFloat(price)) - Dis;
+                sum += output;
+                if (!isNaN(output)) {
+                    $("input[name='total[]']").eq(index).val(output);
+                    $("#alltotal").val(sum);
+                }
+                $("#alltotal").val(sum);
+            });
+        });
+    });
+    function newinv() {
+        $('#newinvoice').on('click', function() {
+            var num = $('#num').val("");
+            $('.tbodyy').html("");
+            $('.tbodyy').append(
+                '<tr>\
+                <td><select class="js-example-basic-single form-control" name="product[]"><option selected>type product name</option>@foreach($product as $item)<option value = "{{ $item->id }}" >{{ $item->name }}</option>@endforeach </select></td > \
+                <td><input name = "units[]" type="number" step="0.0000001" value="0"class = "form-control price"></td>\
+                <td><input name = "price[]" type="number" step="0.0000001" value="0"class = "form-control price " ></td>\
+                <td><input name = "Discount[]" type="number" step="0.0000001" value="0"class = "form-control price "></td>\
+                <td><input name = "total[]" type="number"  step="0.0000001" value = "0"class = "form-control price all "readonly></td>\
+                <td></td>\
+                </tr>'
+            );
+            $(".price").keydown(function(e) {
+                var grandTotal = 0;
+                var sum = 0;
+                $("input[name='price[]']").each(function(index) {
+                    var qty = $("input[name='units[]'] ").eq(index).val();
+                    var price = $("input[name='price[]'] ").eq(index).val();
+                    var Dis = $("input[name='Discount[]'] ").eq(index).val();
+                    var output = (parseFloat(qty) * parseFloat(price)) - Dis;
+                    sum += output;
+                    if (!isNaN(output)) {
+                        $("input[name='total[]']").eq(index).val(output);
+                        $("#alltotal").val(sum);
                     }
-
                 });
             });
-        }
-    </script>
+        });
+    }
+    function getivoice() {
+        $('#alltotal').val(0);
+        $('#num').change(function() {
+            var num = $('#num').val();
+            $.ajax({
+                url: "invoiceget/" + num,
+                method: "get",
+                datatype: 'json',
+                data: {
+                    num: num,
+                },
+                success: function(response) {
+                $('.tbodyy').html("");
+                    $.each(response.invoice, function(key,item) {
+                        console.log(item);
+                    $('#cusname').val(item.custommer_id);
+                    $('#customerid').val(item.custommer_id);
+                    var row = '<tr>';
+                        $.each(item.products,function(key,pro){
+                            row+='<td>\<select class="js-example-basic-single form-control" name="product[]"><option value="' + pro.product_id+ '">' + pro.name.{{ App::getlocale() }} + '</option></select></td>';
+                            row+='<td><input name="units[]" type="number" step="0.0000001" value="' + pro.quantity+ '" class="form-control price"></td>';
+                            row+='<td><input name="price[]" type="number" step="0.0000001" value="' + pro.price + '" class="form-control price"></td>';
+                            row+='<td><input name="Discount[]" type="number" step="0.0000001" value="' + pro.discount + '" class="form-control price"></td>';
+                            row+=' <td><input name="total[]" type="number" step="0.0000001" value="' + pro.totalPrice + '" class="form-control price all"readonly></td>';
+                            row+=' <td></td></tr>';
+                            }); $('.tbodyy').append(row);
+                        });
+
+
+                    $.each(response.invoice, function(key, item) {
+                        $.each(item.products, function(key, pro) {
+
+                            $('#alltotal').val(pro.totalInvoice);
+                        });
+
+                    });
+                    }
+            });
+        });
+
+    }
+
+
+</script>
 @endsection
